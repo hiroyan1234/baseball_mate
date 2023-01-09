@@ -39,6 +39,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :favorite_players, only: [:index]
     resources :player_post
     resources :team_post
-    #root to: "homes#top"
+    root to: "homes#top"
   end
 end
