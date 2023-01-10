@@ -18,6 +18,18 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def withdrawal
+    @user = current_user
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会を実行しました"
+    redirect_to root_path
+  end
+
+  def unsubscribe
+    @user = current_user
+  end
+
   private
 
   def user_params

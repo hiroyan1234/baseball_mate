@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+.index-post {
+  list-style: none;
+  border-top: solid 1px #DDD;
+}
+
+.post {
+  list-style: none;
+}

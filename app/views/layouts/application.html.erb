@@ -16,11 +16,22 @@
       <div class="container">
         <div class="row d-flex">
           <div class="mr-auto"><%= link_to "Baseballmate", root_path, class: "btn", style: "height: 40px" %></div>
-          <div class="ml-4"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn border" %></div> 
+          <div class="ml-4">
+          <% if !user_signed_in? && !admin_signed_in? %>
+            <%= link_to "ログイン", new_user_registration_path, method: :get, class:"btn border" %>
+          <% end %>
+          <% if user_signed_in? && !admin_signed_in? %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn border" %>
+          <% end %>
+          </div>
         </div>
         <div class="row d-flex" style="height:50">
           <%= link_to "チーム投稿", team_post_index_path, class:"btn" %>
           <%= link_to "選手投稿", player_post_index_path, class:"btn" %>
+        <% if user_signed_in? && !admin_signed_in? %>
+          <%= link_to "マイページ", user_path(current_user.id), class:"btn" %>
+        <% end %>
+
         </div>
       </div>
     </header>
