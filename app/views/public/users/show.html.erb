@@ -44,7 +44,7 @@
     <li class="post">
       <h4>
         <% @user.teams.each do |team| %>
-          <%= team.name %>
+          <%= link_to team.name, team_path(team.id) %>
         <% end %>
       </h4>
     </li>
@@ -58,3 +58,17 @@
     <%= link_to "プロフィールを編集する", edit_user_path, class: "btn btn-success" %>
   </div>
 </div>
+
+<% unless @user.id == current_user.id %>
+  <% if @is_room == true %>
+    <%= link_to "メッセージへ", room_path(@room_id) %>
+  <% else %>
+    <% form_with model: @room, local: true do |f| %>
+      <%= fields_for @entry do |r| %>
+        <%= r.hidden_field :user_id, value: @user.id %>
+      <% end %>
+      <%= f.submit "チャットを始める" %>
+    <% end %>
+   <% end %>
+<% end %>
+    

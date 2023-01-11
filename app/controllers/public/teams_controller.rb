@@ -4,6 +4,23 @@ class Public::TeamsController < ApplicationController
     @user = current_user
   end
 
+  def show
+    @team = Team.find(params[:id])
+  end
+
+  def edit
+    @team = Team.find(params[:id])
+  end
+
+  def update
+    @team = Team.find(params[:id])
+    if @team.update(team_params)
+      redirect_to team_path(@team.id)
+    else
+      render :edit
+    end
+  end
+
   def create
     @team = Team.new(team_params)
     @user = current_user

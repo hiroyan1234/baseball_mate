@@ -1,2 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+
+.index-post {
+  list-style: none;
+  border-top: solid 1px #DDD;
+}
+
+.post {
+  list-style: none;
+}
