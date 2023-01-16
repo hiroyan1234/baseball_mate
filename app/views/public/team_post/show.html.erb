@@ -1,0 +1,47 @@
+<p id="notice"></p>
+<div class="container d-flex pl-5 mb-3">
+  <h4 class="bg-light">投稿内容詳細</h4>
+</div>
+
+<div class="container mb-4">
+  <div class="row">
+    <div class="col-5">
+      <% if @team_post.team.image.attached? %>
+        <%= image_tag @team_post.team.image, size: "200x200" %>
+      <% else %>
+        <%= image_tag 'default-image', size: "200x200" %>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <table class="table">
+        <tr>
+          <th style="width :25%">チーム名</th><td><%= @team_post.team.name %></td>
+        </tr>
+        <tr>
+          <th>投稿者</th><td><%= @team_post.team.user.last_name %></td>
+        </tr>
+        <tr>
+          <th>投稿種類</th><td><%= @team_post.post_type_i18n %></td>
+        </tr>
+        <tr>
+          <th>活動エリア</th><td><%= @team_post.area %></td>
+        </tr>
+        <tr>
+          <th>本文</th><td><%= @team_post.content %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class"container mt-4">
+  <div class="d-flex align-items-center justify-content-center">
+    <% if @team_post.team.user.id == current_user.id %>
+      <%= form_with model: @team_post, url: team_post_path, method: :delete do |f| %>
+        <%= f.submit "コメントを削除する", class: "btn btn-danger" %>
+      <% end %>
+    <% else %>
+      <%= link_to "コメントを送信する", edit_user_path, class: "btn btn-primary" %>
+  </div>
+    <% end %>
+</div>

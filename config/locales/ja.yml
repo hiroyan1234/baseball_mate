@@ -4,8 +4,14 @@ ja:
       sex:
         male: "男性"
         female: "女性"
-        
+
     player_post:
       type:
         join: "入団希望"
         helper: "助っ人参加"
+
+    team_post:
+      post_type:
+        recruitment: "メンバー募集"
+        helper: "助っ人募集"
+        game: "対戦相手募集"

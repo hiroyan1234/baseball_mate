@@ -23,11 +23,7 @@
         <tr>
           <th>性別</th>
           <td>
-            <% if @user.sex == "male" %>
-              男性
-            <% else %>
-              女性
-            <% end %>
+            <%= @user.sex_i18n %>
           </td>
         </tr>
         <tr>

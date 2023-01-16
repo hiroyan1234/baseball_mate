@@ -6,6 +6,7 @@ class Public::TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @team_post = TeamPost.new
   end
 
   def edit

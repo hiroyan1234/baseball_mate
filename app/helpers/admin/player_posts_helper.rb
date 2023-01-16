@@ -1,0 +1,2 @@
+module Admin::PlayerPostsHelper
+end
