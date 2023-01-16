@@ -1,0 +1,2 @@
+module Public::FavoritePlayersHelper
+end

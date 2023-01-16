@@ -1,8 +1,8 @@
 class TeamPost < ApplicationRecord
 
   belongs_to :team
-  has_many :favorite_team
-  has_many :tag_center
+  has_many :favorite_teams, dependent: :destroy
+  has_many :tag_centers
 
   validates :content, presence: true
   validates :post_type, presence: true

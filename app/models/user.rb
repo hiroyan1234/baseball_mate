@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :teams
   has_many :favorite_players
-  has_many :favorite_teams
+  has_many :favorite_teams, dependent: :destroy
   has_many :messages
   has_many :enters
   has_many :player_posts
@@ -23,4 +23,8 @@ class User < ApplicationRecord
   validates :is_deleted, inclusion: {in: [true, false]}
 
   enum sex: { male: 0, female: 1 }
+  
+  def already_favorited?(team_post)
+    self.team_favorites.exists?(team_post_id: team_post_id)
+  end
 end
