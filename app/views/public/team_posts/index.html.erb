@@ -1,0 +1,35 @@
+<div class="container d-flex mt-4 mb-4">
+  <h4 class="bg-light">チーム投稿一覧</h4>
+</div>
+
+
+<div class="d-flex ml-4">
+  <table class="table table-bordered" style="width: 85%">
+    <thead class="bg-light">
+      <tr>
+        <th>チーム名</th>
+        <th>本文</th>
+        <th>投稿種類</th>
+        <th>活動エリア</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @team_posts.each do |team_post| %>
+        <td class="align-middle"><%= team_post.team.name %></td>
+        <td class="align-middle"><%= link_to team_post.content, team_post_path(team_post) %></td>
+        <td class="align-middle"><%= team_post.post_type_i18n %></td>
+        <td class="align-middle"><%= team_post.area %></td>
+        <td class="align-middle">
+          <% if current_user.already_favorited?(team_post) %>
+            <%= link_to "いいねを外す", team_post_favorite_teams_path(team_post), method: :delete %>
+          <% else %>
+            <%= link_to "いいね", team_post_favorite_teams_path(team_post), method: :post %>
+          <% end %>
+          <%= team_post.favorite_teams.count %>
+        </td>
+      </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>

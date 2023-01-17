@@ -23,8 +23,8 @@ class User < ApplicationRecord
   validates :is_deleted, inclusion: {in: [true, false]}
 
   enum sex: { male: 0, female: 1 }
-  
+
   def already_favorited?(team_post)
-    self.team_favorites.exists?(team_post_id: team_post_id)
+    self.favorite_teams.exists?(team_post_id: team_post.id)
   end
 end

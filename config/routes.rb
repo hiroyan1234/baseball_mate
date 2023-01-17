@@ -21,8 +21,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :teams, only: [:index, :edit, :update, :show]
     resources :rooms, only: [:index, :show]
     get 'homes/top'
-    resources :player_post, only: [:index, :show, :destroy]
-    resources :team_post, only: [:indes, :show, :destroy]
+    resources :player_posts, only: [:index, :show, :destroy]
+    resources :team_posts, only: [:indes, :show, :destroy]
   end
 
   scope module: :public do
@@ -30,16 +30,19 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     get 'homes/about'
     get 'users/unsubscribe'
     patch "users/withdrawal"
-    post "team_post/new/view" => "team_post#new", as:"team_post_new"
+    post "team_posts/new/view" => "team_posts#new", as:"team_posts_new"
     resources :teams
     resources :players, only: [:index, :show]
     resources :users, only: [:edit, :update, :show]
     resources :messages, only: [:create]
-    resources :room, only: [:index, :show, :create]
+    resources :rooms, only: [:index, :show, :create]
     resources :favorite_teams, only: [:index]
     resources :favorite_players, only: [:index]
-    resources :player_post
-    resources :team_post, only: [:index, :edit, :update, :create, :destroy, :show]
+    resources :player_posts
+    resources :team_posts, only: [:index, :edit, :update, :create, :destroy, :show]
     root to: "homes#top"
+    resources :team_posts do
+      resource :favorite_teams, only: [:create, :destroy]
+    end
   end
 end

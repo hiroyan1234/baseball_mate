@@ -1,4 +1,4 @@
-class Public::TeamPostController < ApplicationController
+class Public::TeamPostsController < ApplicationController
   def new
     @team_post = TeamPost.new(team_post_params)
   end
@@ -7,7 +7,7 @@ class Public::TeamPostController < ApplicationController
     @team_post = TeamPost.new(team_post_params)
     if @team_post.save
       flash[:notice] = "投稿完了しました"
-      redirect_to team_post_path(@team_post.id)
+      redirect_to team_posts_path(@team_post.id)
     else
       render :new
     end
@@ -15,6 +15,10 @@ class Public::TeamPostController < ApplicationController
 
   def show
     @team_post = TeamPost.find(params[:id])
+  end
+
+  def index
+    @team_posts = TeamPost.all
   end
 
   def destroy
