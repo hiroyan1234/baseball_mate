@@ -6,8 +6,8 @@ ja:
         female: "女性"
 
     player_post:
-      type:
-        join: "入団希望"
+      post_type:
+        join_team: "入団希望"
         helper: "助っ人参加"
 
     team_post:

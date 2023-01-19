@@ -10,4 +10,8 @@ class Public::FavoriteTeamsController < ApplicationController
     @favorite_team.destroy
     redirect_back(fallback_location: root_path)
   end
+  
+  def index
+    @favorite_teams = current_user.favorite_teams
+  end
 end

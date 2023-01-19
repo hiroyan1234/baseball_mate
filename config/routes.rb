@@ -32,17 +32,20 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     patch "users/withdrawal"
     post "team_posts/new/view" => "team_posts#new", as:"team_posts_new"
     resources :teams
+    resources :player_posts
     resources :players, only: [:index, :show]
     resources :users, only: [:edit, :update, :show]
     resources :messages, only: [:create]
     resources :rooms, only: [:index, :show, :create]
     resources :favorite_teams, only: [:index]
     resources :favorite_players, only: [:index]
-    resources :player_posts
     resources :team_posts, only: [:index, :edit, :update, :create, :destroy, :show]
     root to: "homes#top"
     resources :team_posts do
       resource :favorite_teams, only: [:create, :destroy]
+    end
+    resources :player_posts do
+      resource :favorite_players, only: [:create, :destroy]
     end
   end
 end

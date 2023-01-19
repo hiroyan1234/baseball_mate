@@ -30,6 +30,7 @@
           <th>自己紹介</th><td><%= @user.introduction %></td>
         </tr>
       </table>
+      <%= link_to "投稿する", new_player_post_path, class: "btn btn-primary" %>
     </div>
   </div>
 </div>
@@ -67,4 +68,3 @@
     <% end %>
    <% end %>
 <% end %>
-    

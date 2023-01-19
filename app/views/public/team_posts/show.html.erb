@@ -15,9 +15,13 @@
     <div class="col-6">
       <div>
       <% if current_user.already_favorited?(@team_post) %>
-        <%= link_to "いいねを外す", team_post_favorite_teams_path(@team_post), method: :delete %>
+        <%= link_to team_post_favorite_teams_path(@team_post), method: :delete do %>
+          <i class="fas fa-heart"></i>
+        <% end %>
       <% else %>
-        <%= link_to "いいね", team_post_favorite_teams_path(@team_post), method: :post %>
+        <%= link_to team_post_favorite_teams_path(@team_post), method: :post do %>
+          <i class="far fa-heart"></i>
+        <% end %>
       <% end %>
         <%= @team_post.favorite_teams.count %>
       </div>
