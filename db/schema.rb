@@ -93,8 +93,16 @@ ActiveRecord::Schema.define(version: 2023_01_19_115824) do
   end
 
   create_table "tag_centers", force: :cascade do |t|
+    t.integer "team_post_id"
+    t.integer "player_post_id"
+    t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_post_id", "tag_id"], name: "index_tag_centers_on_player_post_id_and_tag_id", unique: true
+    t.index ["player_post_id"], name: "index_tag_centers_on_player_post_id"
+    t.index ["tag_id"], name: "index_tag_centers_on_tag_id"
+    t.index ["team_post_id", "tag_id"], name: "index_tag_centers_on_team_post_id_and_tag_id", unique: true
+    t.index ["team_post_id"], name: "index_tag_centers_on_team_post_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -146,4 +154,7 @@ ActiveRecord::Schema.define(version: 2023_01_19_115824) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "tag_centers", "player_posts"
+  add_foreign_key "tag_centers", "tags"
+  add_foreign_key "tag_centers", "team_posts"
 end
