@@ -27,6 +27,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   scope module: :public do
     get 'homes/top'
+    get 'search' => 'team_posts#search'
+    get 'tag_search' => 'team_posts#tag_search'
     get 'homes/about'
     get 'users/unsubscribe'
     patch "users/withdrawal"

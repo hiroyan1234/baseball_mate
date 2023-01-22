@@ -9,29 +9,37 @@
     <div class="row">
         <table class="table">
           <tr>
-            <th style="width: 30%">本文</th><td style="width: 40%"><%= f.text_area :content, placeholder: "本文", style: "width: 70%", rows: 5 %></td>
+            <th>タイトル</th><td><%= f.text_field :title, placeholder: "(例) ピッチャーを募集しています", style: "width: 100%" %></td>
           </tr>
           <tr>
             <th>投稿種類</th><td><%= f.select :post_type, TeamPost.post_types.keys.map {|k| [I18n.t("enums.team_post.post_type.#{k}"), k]}, { prompt: "選択してください" } %></td>
           </tr>
           <tr>
-            <th>活動エリア</th><td><%= f.text_field :area, placeholder: "(例)東京都日野市" %></td>
+            <th>活動都道府県</th><td><%= f.text_field :prefecture, placeholder: "(例)東京都" %></td>
+          </tr>
+          <tr>
+            <th>活動都市</th><td><%= f.text_field :city, placeholder: "(例)日野市" %></td>
+          </tr>
+          <tr>
+            <th style="width: 30%">本文</th><td style="width: 40%"><%= f.text_area :content, placeholder: "本文", style: "width: 70%", rows: 5 %></td>
           </tr>
           <tr>
             <th>
               <div>タグ</div>
-                <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+
               <div>
-                  <%= tag.label class: "form-check-label" do %>
-                    <%= tag.check_box class: "form-check-input" %>
-                    <%= tag.text %>
-                  <% end %>
+                <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+                  <div>
+                    <%= tag.label class: "form-check-label" do %>
+                      <%= tag.check_box class: "form-check-input" %>
+                      <%= tag.text %>
+                    <% end %>
+                  </div>
                 <% end %>
               </div>
             </th>
             <td>
-              <div>追加タグ</div>
-              <div><%= f.text_field :name %></div>
+              <div><%= f.text_field :name, placeholder: "(例) エンジョイ 初心者歓迎", style: "width: 90%" %></div>
             </td>
           </tr>
         </table>

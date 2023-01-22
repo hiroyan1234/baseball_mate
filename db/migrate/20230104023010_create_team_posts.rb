@@ -4,8 +4,9 @@ class CreateTeamPosts < ActiveRecord::Migration[6.1]
 
       t.string :content
       t.integer :type
-      t.string :area
-      t.string :position
+      t.string :title
+      t.string :prefecture
+      t.string :city
       t.timestamps
     end
   end

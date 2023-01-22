@@ -2,12 +2,13 @@ class TeamPost < ApplicationRecord
 
   belongs_to :team
   has_many :favorite_teams, dependent: :destroy
-  has_many :tag_centers, dependent: :destroy
-  has_many :tags, through: :tag_centers, dependent: :destroy
+  has_many :tag_teams, dependent: :destroy
+  has_many :tags, through: :tag_teams, dependent: :destroy
 
   validates :content, presence: true
   validates :post_type, presence: true
-  validates :area, presence: true
+  validates :prefecture, presence: true
+  validates :title, presence: true
 
   enum post_type: { recruitment: 0, helper: 1, game: 2 }
 
@@ -24,5 +25,9 @@ class TeamPost < ApplicationRecord
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
     end
+  end
+
+  def self.search(keyword)
+    where(["content like? OR title like?", "%#{keyword}%", "%#{keyword}%"])
   end
 end

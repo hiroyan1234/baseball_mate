@@ -7,6 +7,32 @@
   border-top: solid 1px #DDD;
 }
 
-.post {
+.recruit-list {
   list-style: none;
+  border-top: solid 1px #DDD;
+  margin: 0;
+  padding: 0;
+}
+
+.recruit {
+  border-bottom: solid 1px #DDD;
+}
+
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tags {
+  float: left;
+  text-align: left;
+}
+
+.heart {
+  text-align: right;
+}
+
+.author {
+  margin-top: 1px;
 }

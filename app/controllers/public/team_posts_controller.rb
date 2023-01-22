@@ -23,6 +23,13 @@ class Public::TeamPostsController < ApplicationController
   def index
     @team_posts = TeamPost.all
     @tag_list = Tag.all
+    if params[:tag_ids]
+      @team_posts = [:name]
+      params[:tag_ids].each do |key, value|
+        @team_posts += Tag.find_by(name: key).tweets if value == "1"
+      end
+      @team_posts.uniq!
+    end
   end
 
   def destroy
@@ -34,10 +41,22 @@ class Public::TeamPostsController < ApplicationController
     end
   end
 
+  def search
+    @team_posts = TeamPost.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
+  end
+
+  def tag_search
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @team_posts = @tag.team_posts.all
+  end
+
   private
 
   def team_post_params
-    params.require(:team_post).permit(:team_id, :content, :post_type, :area, :position, tag_ids: [:name])
+    params.require(:team_post).permit(:team_id, :title, :content, :post_type, :prefecture, :city, :position, tag_ids: [:name])
   end
 end
 

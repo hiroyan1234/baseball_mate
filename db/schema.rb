@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_19_115824) do
+ActiveRecord::Schema.define(version: 2023_01_21_141321) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -80,8 +80,10 @@ ActiveRecord::Schema.define(version: 2023_01_19_115824) do
   create_table "player_posts", force: :cascade do |t|
     t.string "content"
     t.integer "post_type"
-    t.string "area"
     t.string "position"
+    t.string "title"
+    t.string "prefecture"
+    t.string "city"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
@@ -92,17 +94,24 @@ ActiveRecord::Schema.define(version: 2023_01_19_115824) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tag_centers", force: :cascade do |t|
-    t.integer "team_post_id"
+  create_table "tag_players", force: :cascade do |t|
     t.integer "player_post_id"
     t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["player_post_id", "tag_id"], name: "index_tag_centers_on_player_post_id_and_tag_id", unique: true
-    t.index ["player_post_id"], name: "index_tag_centers_on_player_post_id"
-    t.index ["tag_id"], name: "index_tag_centers_on_tag_id"
-    t.index ["team_post_id", "tag_id"], name: "index_tag_centers_on_team_post_id_and_tag_id", unique: true
-    t.index ["team_post_id"], name: "index_tag_centers_on_team_post_id"
+    t.index ["player_post_id", "tag_id"], name: "index_tag_players_on_player_post_id_and_tag_id", unique: true
+    t.index ["player_post_id"], name: "index_tag_players_on_player_post_id"
+    t.index ["tag_id"], name: "index_tag_players_on_tag_id"
+  end
+
+  create_table "tag_teams", force: :cascade do |t|
+    t.integer "team_post_id"
+    t.integer "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tag_id"], name: "index_tag_teams_on_tag_id"
+    t.index ["team_post_id", "tag_id"], name: "index_tag_teams_on_team_post_id_and_tag_id", unique: true
+    t.index ["team_post_id"], name: "index_tag_teams_on_team_post_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -114,8 +123,9 @@ ActiveRecord::Schema.define(version: 2023_01_19_115824) do
   create_table "team_posts", force: :cascade do |t|
     t.string "content"
     t.integer "post_type"
-    t.string "area"
-    t.string "position"
+    t.string "title"
+    t.string "prefecture"
+    t.string "city"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "team_id"
@@ -154,7 +164,8 @@ ActiveRecord::Schema.define(version: 2023_01_19_115824) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "tag_centers", "player_posts"
-  add_foreign_key "tag_centers", "tags"
-  add_foreign_key "tag_centers", "team_posts"
+  add_foreign_key "tag_players", "player_posts"
+  add_foreign_key "tag_players", "tags"
+  add_foreign_key "tag_teams", "tags"
+  add_foreign_key "tag_teams", "team_posts"
 end
