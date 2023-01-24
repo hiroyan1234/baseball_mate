@@ -12,11 +12,29 @@ class Public::PlayerPostsController < ApplicationController
     else
       render :new
     end
+  end 
+  
+  def index
+    @player_posts = PlayerPost.all
+    @tag_list = Tag.all
+    if params[:tag_ids]
+      @player_posts = [:name]
+      params[:tag_ids].each do |key, value|
+        @player_posts += Tag.find_by(name: key).tweets if value == "1"
+      end
+      @player_posts.uniq!
+    end
+  end
+  
+  def search
+    @team_posts = TeamPost.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
   end
   
   private
   
   def player_post_params
-    params.require(:player_post).permit(:user_id, :content, :post_type, :area, :position)
+    params.require(:player_post).permit(:user_id, :content, :post_type, :area, :position, :city, :prefecture, :title, tag_ids: [:name])
   end
 end

@@ -1,11 +1,11 @@
 <div class="container d-flex mt-4 mb-4">
-  <h4 class="bg-light">チーム投稿一覧</h4>
+  <h4 class="bg-light">選手投稿一覧</h4>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="search-form col-3">
-      <%= form_with url: team_search_path, method: :get, local: true do |f| %>
+      <%= form_with url: player_search_path, method: :get, local: true do |f| %>
         <%= f.text_field :keyword, value: @keyword %>
         <%= f.submit "検索" %>
       <% end %>
@@ -13,12 +13,12 @@
 
     <div class="col-7">
       <ul class="recruit-list">
-        <% @team_posts.each do |team_post| %>
+        <% @player_posts.each do |player_post| %>
           <li class="recruit new_rec">
             <h4 class="align-middle title">
-              <%= link_to team_post.title, team_post_path(team_post) %>
+              <%= link_to player_post.title, player_post_path(player_post) %>
             </h4>
-            <div class="author">チーム名: <%= link_to team_post.team.name, team_path(team_post.team.id) %></div>
+            <div class="author">チーム名: <%= link_to player_post.nickname, player_path(team_post.team.id) %></div>
             <ol class="sub pb-2">
               <li>投稿種類: <%= team_post.post_type_i18n %></li>
               <li>活動場所: <%= team_post.prefecture %> > <%= team_post.city %></li>
@@ -26,7 +26,7 @@
             <div>
               <ol class="text-l">
                 <% team_post.tags.each do |tag| %>
-                  <span class="tag"><%= link_to tag.name, team_tag_search_path(tag_id: tag.id) %></span>
+                  <span class="tag"><%= link_to tag.name, tag_search_path(tag_id: tag.id) %></span>
                 <% end %>
               </ol>
               <h5 class="text-r heart">

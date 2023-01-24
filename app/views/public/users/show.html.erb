@@ -30,29 +30,61 @@
           <th>自己紹介</th><td><%= @user.introduction %></td>
         </tr>
       </table>
-      <%= link_to "投稿する", new_player_post_path, class: "btn btn-primary" %>
+      <div class="d-flex">
+        <div class="mr-4">
+          <%= link_to "新規投稿する", new_player_post_path, class: "btn btn-primary" %>
+        </div>
+        <div>
+          <%= link_to "プロフィールを編集する", edit_user_path, class: "btn btn-success" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="container d-flex mt-4">
-  <h4 class="bg-light">登録チーム</h4>
-</div>
-  <ul class="index-post">
-    <li class="post">
-      <h4>
+
+  <div class="container index-post">
+    <div class="d-flex mt-4">
+      <h4 class="bg-light">登録チーム</h4>
+    </div>
+    <div class="mt-4 team-list row d-flex">
         <% @user.teams.each do |team| %>
-          <%= link_to team.name, team_path(team.id) %>
+          <div class="mt-4 container team">
+            <div class="row">
+              <div class="text-l">
+                <h4 class="space">チーム名</h4>
+              </div>
+              <div class="mb-4 text-l">
+                <% if team.image.attached? %>
+                  <%= image_tag team.image, size: "35x35" %>
+                <% else %>
+                  <%= image_tag 'default-image', size: "35x35" %>
+                <% end %>
+              </div>
+              <div class="pb-2 ml-3 text-l mr-auto">
+                <h4>
+                  <%= link_to team.name, team_path(team.id) %>
+                </h4>
+              </div>
+                <div class="mr-4">
+                  <%= form_with model: @team_post, url: team_posts_new_path, method: :post do |f| %>
+                    <%= f.hidden_field :team_id, :value => team.id %>
+                    <%= f.submit "新規投稿", class: "btn btn-primary" %>
+                  <% end %>
+                </div>
+                <div class="">
+                  <%= link_to "編集する", edit_team_path(team), class: "btn btn-success" %>
+                </div>
+            </div>
+          </div>
         <% end %>
-      </h4>
-    </li>
-  </ul>
+    </div>
+  </div>
 
 <div class"container mt-4">
   <div class="d-flex align-items-center justify-content-center">
     <div class="mr-4">
       <%= link_to "チームを登録する", new_team_path, class: "btn btn-success" %>
     </div>
-    <%= link_to "プロフィールを編集する", edit_user_path, class: "btn btn-success" %>
   </div>
 </div>
 

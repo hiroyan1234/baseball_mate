@@ -1,7 +1,7 @@
 <div class="container d-flex mt-4 mb-4">
   <h4 class="bg-light">チーム投稿一覧</h4>
   <div class="search-form">
-    <%= form_with url: team_search_path, method: :get, local: true do |f| %>
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
       <%= f.text_field :keyword, value: @keyword %>
       <%= f.submit "検索" %>
     <% end %>
@@ -40,7 +40,7 @@
         </td>
         <td>
           <% team_post.tags.each do |tag| %>
-            <span><%= link_to tag.name, team_tag_search_path(tag_id: tag.id) %></span>
+            <span><%= link_to tag.name, tag_search_path(tag_id: tag.id) %></span>
           <% end %>
         </td>
       </tr>

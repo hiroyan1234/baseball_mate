@@ -1,10 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+.space {
+  margin-right: 15px;
+}
 
 .index-post {
   list-style: none;
   border-top: solid 1px #DDD;
+}
+
+.recruit {
+  border-bottom: solid 1px #DDD;
 }
 
 .recruit-list {
@@ -14,9 +21,17 @@
   padding: 0;
 }
 
-.recruit {
+.team {
   border-bottom: solid 1px #DDD;
 }
+
+.team-list {
+  border-top: solid 1px #DDD;
+  margin: 0;
+  padding: 0;
+}
+
+
 
 ol {
   list-style: none;
@@ -24,15 +39,31 @@ ol {
   padding: 0;
 }
 
-.tags {
+.text-l {
   float: left;
   text-align: left;
 }
 
-.heart {
+.text-r {
   text-align: right;
 }
 
 .author {
   margin-top: 1px;
+}
+
+.heart {
+  color: #888;
+}
+
+.sub {
+  color: #888;
+  font-size: 13px;
+}
+
+.tag {
+  padding: 3px;
+  border: 1px solid #888;
+  border-radius: 3px;
+  font-size: 15px;
 }
