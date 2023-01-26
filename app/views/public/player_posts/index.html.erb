@@ -18,25 +18,25 @@
             <h4 class="align-middle title">
               <%= link_to player_post.title, player_post_path(player_post) %>
             </h4>
-            <div class="author">チーム名: <%= link_to player_post.nickname, player_path(team_post.team.id) %></div>
+            <div class="author">: <%= link_to player_post.user.nickname, player_path(player_post.user_id) %></div>
             <ol class="sub pb-2">
-              <li>投稿種類: <%= team_post.post_type_i18n %></li>
-              <li>活動場所: <%= team_post.prefecture %> > <%= team_post.city %></li>
+              <li>投稿種類: <%= player_post.post_type_i18n %></li>
+              <li>活動場所: <%= player_post.prefecture %> > <%= player_post.city %></li>
             </ol>
             <div>
               <ol class="text-l">
-                <% team_post.tags.each do |tag| %>
-                  <span class="tag"><%= link_to tag.name, tag_search_path(tag_id: tag.id) %></span>
+                <% player_post.tags.each do |tag| %>
+                  <span class="tag"><%= link_to tag.name, player_tag_search_path(tag_id: tag.id) %></span>
                 <% end %>
               </ol>
               <h5 class="text-r heart">
                 お気に入り
-                <% if current_user.already_favorited?(team_post) %>
-                  <%= link_to team_post_favorite_teams_path(team_post), method: :delete do %>
+                <% if current_user.already_player_favorited?(player_post) %>
+                  <%= link_to player_post_favorite_players_path(player_post), method: :delete do %>
                     <i class="fas fa-heart"></i>
                   <% end %>
                 <% else %>
-                  <%= link_to team_post_favorite_teams_path(team_post), method: :post do %>
+                  <%= link_to player_post_favorite_players_path(player_post), method: :post do %>
                     <i class="far fa-heart"></i>
                   <% end %>
                 <% end %>

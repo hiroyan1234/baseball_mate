@@ -2,15 +2,17 @@ class PlayerPost < ApplicationRecord
 
   belongs_to :user
   has_many :favorite_players, dependent: :destroy
-  has_many :tag_centers, dependent: :destroy
+  has_many :tag_players, dependent: :destroy
+  has_many :tags, through: :tag_players, dependent: :destroy
+
 
   validates :content, presence: true
   validates :post_type, presence: true
-  validates :area, presence: true
+  validates :prefecture, presence: true
   validates :position, presence: true
 
   enum post_type: { join_team: 0, helper: 1 }
-  
+
   def save_tag(sent_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
     old_tags = current_tags - sent_tags

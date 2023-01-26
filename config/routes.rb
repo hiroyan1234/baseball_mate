@@ -16,7 +16,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-    namespace :admin do
+  namespace :admin do
     resources :users, only: [:index, :edit, :update, :show]
     resources :teams, only: [:index, :edit, :update, :show]
     resources :rooms, only: [:index, :show]
@@ -45,11 +45,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :favorite_players, only: [:index]
     resources :team_posts, only: [:index, :edit, :update, :create, :destroy, :show]
     root to: "homes#top"
-    resources :team_posts do
-      resource :favorite_teams, only: [:create, :destroy]
-    end
     resources :player_posts do
       resource :favorite_players, only: [:create, :destroy]
+    end
+    resources :team_posts do
+      resource :favorite_teams, only: [:create, :destroy]
     end
   end
 end

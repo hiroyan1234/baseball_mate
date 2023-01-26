@@ -1,35 +1,45 @@
-<p id="notice"></p>
-<div class="container mt-4">
-  <div class="d-flex">
-    <h4 class="bg-light">お気に入りチーム投稿</h4>
-  </div>
+<div class="container d-flex mt-4 mb-4">
+  <h4 class="bg-light">お気に入りチーム投稿一覧</h4>
 </div>
 
-<div class="d-flex ml-4">
-  <table class="table table-bordered" style="width: 85%">
-    <thead class="bg-light">
-      <tr>
-        <th>チーム名</th>
-        <th>本文</th>
-        <th>投稿種類</th>
-        <th>活動エリア</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <% @favorite_teams.each do |favorite_team| %>
-        <td class="align-middle"><%= favorite_team.team_post.team.name %></td>
+<div class="container">
+  <div class="row">
+    <div class="search-form col-3"></div>
 
-        <td>
-          <% if current_user.already_favorited?(favorite_team.team_post) %>
-            <%= link_to team_post_favorite_teams_path(favorite_team.team_post), method: :delete do %>
-              <i class="fas fa-heart"></i>
-            <% end %>
-          <% else %>
-            <%= link_to team_post_favorite_teams_path(favorite_team.team_post), method: :post do %>
-              <i class="far fa-heart"></i>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
+    <div class="col-7">
+      <ul class="recruit-list">
+        <% @favorite_teams.each do |favorite_team| %>
+          <li class="recruit new_rec">
+            <h4 class="align-middle title">
+              <%= link_to favorite_team.team_post.title, team_post_path(favorite_team.team_post) %>
+            </h4>
+            <div class="author">チーム名: <%= link_to favorite_team.team_post.team.name, team_path(favorite_team.team_post.team.id) %></div>
+            <ol class="sub pb-2">
+              <li>投稿種類: <%= favorite_team.team_post.post_type_i18n %></li>
+              <li>活動場所: <%= favorite_team.team_post.prefecture %> > <%= favorite_team.team_post.city %></li>
+            </ol>
+            <div>
+              <ol class="text-l">
+                <% favorite_team.team_post.tags.each do |tag| %>
+                  <span class="tag"><%= link_to tag.name, team_tag_search_path(tag_id: tag.id) %></span>
+                <% end %>
+              </ol>
+              <h5 class="text-r heart">
+                お気に入り
+                <% if current_user.already_team_favorited?(favorite_team.team_post) %>
+                  <%= link_to team_post_favorite_teams_path(favorite_team.team_post), method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to team_post_favorite_teams_path(favorite_team.team_post), method: :post do %>
+                    <i class="far fa-heart"></i>
+                  <% end %>
+                <% end %>
+              </h5>
+            </div>
+          </li>
         <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

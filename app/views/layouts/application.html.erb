@@ -33,6 +33,7 @@
         <% if user_signed_in? && !admin_signed_in? %>
           <%= link_to "マイページ", user_path(current_user.id), class:"btn" %>
           <%= link_to "お気に入りチーム投稿", favorite_teams_path, class:"btn" %>
+          <%= link_to "お気に入り選手投稿", favorite_players_path, class:"btn" %>
         <% end %>
 
         </div>

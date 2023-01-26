@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_one_attached :image
 
   has_many :teams
-  has_many :favorite_players
+  has_many :favorite_players, dependent: :destroy
   has_many :favorite_teams, dependent: :destroy
   has_many :messages
   has_many :enters
@@ -24,7 +24,11 @@ class User < ApplicationRecord
 
   enum sex: { male: 0, female: 1 }
 
-  def already_favorited?(team_post)
+  def already_team_favorited?(team_post)
     self.favorite_teams.exists?(team_post_id: team_post.id)
+  end
+
+  def already_player_favorited?(player_post)
+    self.favorite_players.exists?(player_post_id: player_post.id)
   end
 end

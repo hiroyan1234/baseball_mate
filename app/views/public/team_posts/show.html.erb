@@ -14,7 +14,7 @@
     </div>
     <div class="col-6">
       <div>
-      <% if current_user.already_favorited?(@team_post) %>
+      <% if current_user.already_team_favorited?(@team_post) %>
         <%= link_to team_post_favorite_teams_path(@team_post), method: :delete do %>
           <i class="fas fa-heart"></i>
         <% end %>

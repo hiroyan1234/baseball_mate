@@ -11,16 +11,25 @@
     <div class="row">
         <table class="table">
           <tr>
+            <th>タイトル</th><td><%= f.text_field :title, placeholder: "ピッチャーとして入団希望しています", style: "width: 80%" %></td>
+          </tr>
+          <tr>
             <th style="width: 30%">本文</th><td style="width: 40%"><%= f.text_area :content, placeholder: "本文", style: "width: 70%", rows: 5 %></td>
           </tr>
           <tr>
             <th>投稿種類</th><td><%= f.select :post_type, PlayerPost.post_types.keys.map {|k| [I18n.t("enums.player_post.post_type.#{k}"), k]}, { prompt: "選択してください" } %></td>
           </tr>
           <tr>
-            <th>活動エリア</th><td><%= f.text_field :area, placeholder: "(例)東京都日野市" %></td>
+            <th>活動都道府県</th><td><%= f.text_field :prefecture, placeholder: "(例)東京都" %></td>
+          </tr>
+          <tr>
+            <th>活動都市</th><td><%= f.text_field :city, placeholder: "(例)日野市" %></td>
           </tr>
           <tr>
             <th>ポジション</th><td><%= f.text_field :position, placeholder: "(例)ピッチャー" %></td>
+          </tr>
+          <tr>
+            <th>タグ</th><td><%= f.text_field :name, placeholder: "(例) エンジョイ 初心者歓迎", style: "width: 90%" %></td>
           </tr>
         </table>
     </div>
