@@ -1,6 +1,14 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+.list {
+  list-style: none;
+}
+
+.title {
+  padding-left: 24px;
+}
+
 .space {
   margin-right: 15px;
 }
@@ -66,4 +74,8 @@ ol {
   border: 1px solid #888;
   border-radius: 3px;
   font-size: 15px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
 }

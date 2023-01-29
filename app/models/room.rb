@@ -1,6 +1,6 @@
 class Room < ApplicationRecord
-  
-  has_many :message
-  has_many :enter
-  
+
+  has_many :messages, dependent: :destroy
+  has_many :enters, dependent: :destroy
+
 end

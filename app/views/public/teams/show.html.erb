@@ -20,6 +20,16 @@
           <th style="width :25%">チーム名</th><td><%= @team.name %></td>
         </tr>
         <tr>
+          <th>投稿者</th>
+          <% if @team.user.nickname = true %>
+            <td><%= link_to @team.user.nickname, user_path(@team.user) %></td>
+          <% else %>
+            <%= link_to user_path(@team.user) do %>
+              <td><%= @team.user.last_name %> <%= @team.user.first_name %></td>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
           <th>平均年齢</th><td><%= @team.age %></td>
         </tr>
         <tr>

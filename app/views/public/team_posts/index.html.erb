@@ -31,13 +31,15 @@
               </ol>
               <h5 class="text-r heart">
                 お気に入り
-                <% if current_user.already_team_favorited?(team_post) %>
-                  <%= link_to team_post_favorite_teams_path(team_post), method: :delete do %>
-                    <i class="fas fa-heart"></i>
-                  <% end %>
-                <% else %>
-                  <%= link_to team_post_favorite_teams_path(team_post), method: :post do %>
-                    <i class="far fa-heart"></i>
+                <% if user_signed_in? %>
+                  <% if current_user.already_team_favorited?(team_post) %>
+                    <%= link_to team_post_favorite_teams_path(team_post), method: :delete do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to team_post_favorite_teams_path(team_post), method: :post do %>
+                      <i class="far fa-heart"></i>
+                    <% end %>
                   <% end %>
                 <% end %>
               </h5>

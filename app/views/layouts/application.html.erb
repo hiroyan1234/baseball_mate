@@ -16,27 +16,28 @@
     <p id="notice"></p>
     <header class="border-bottom">
       <div class="container">
-        <div class="row d-flex">
-          <div class="mr-auto"><%= link_to "Baseballmate", root_path, class: "btn", style: "height: 40px" %></div>
-          <div class="ml-4">
+        <div class="row d-flex mb-4">
+          <div class="mr-auto"><%= link_to "Baseball-mate", root_path, class: "btn border", style: "height: 40px" %></div>
           <% if !user_signed_in? && !admin_signed_in? %>
-            <%= link_to "ログイン", new_user_registration_path, method: :get, class:"btn border" %>
+            <div class="title"><%= link_to "ログイン", new_user_session_path, method: :get, class: "btn border" %></div>
+            <div class="title"><%= link_to "新規登録", new_user_registration_path, class: "btn border" %></div>
+          <% elsif user_signed_in? && !admin_signed_in? %>
+            <div class="title"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn border" %></div>
+            <div class="title"><%= link_to "マイページ", user_path(current_user.id), class:"btn border" %></div>
+          <% elsif admin_signed_in? %>
+            <div class="title"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn border" %></div>
           <% end %>
-          <% if user_signed_in? && !admin_signed_in? %>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn border" %>
-          <% end %>
-          </div>
         </div>
-        <div class="row d-flex" style="height:50">
-          <%= link_to "チーム投稿", team_posts_path, class:"btn" %>
-          <%= link_to "選手投稿", player_posts_path, class:"btn" %>
+        <nav class="row d-flex" style="height:50">
+          <li class="list"><%= link_to "チーム投稿", team_posts_path, class: "btn" %></li>
+          <li class="title list"><%= link_to "選手投稿", player_posts_path, class: "btn" %></li>
         <% if user_signed_in? && !admin_signed_in? %>
-          <%= link_to "マイページ", user_path(current_user.id), class:"btn" %>
-          <%= link_to "お気に入りチーム投稿", favorite_teams_path, class:"btn" %>
-          <%= link_to "お気に入り選手投稿", favorite_players_path, class:"btn" %>
+          <li class="title list"><%= link_to "お気に入りチーム投稿", favorite_teams_path, class: "btn" %></li>
+          <li class="title list"><%= link_to "お気に入り選手投稿", favorite_players_path, class: "btn" %></li>
+          <li class="title list"><%= link_to "メッセージ一覧", rooms_path, class: "btn" %></li>
         <% end %>
 
-        </div>
+        </nav>
       </div>
     </header>
     <%= yield %>

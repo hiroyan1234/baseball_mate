@@ -14,3 +14,8 @@ Tag.create([
   { name: '練習試合' },
   { name: '公式戦' }
 ])
+
+Admin.create!(
+  email: "hiro@hiro.com",
+  password: "aaaaaa",
+)

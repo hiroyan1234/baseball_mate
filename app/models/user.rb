@@ -6,8 +6,8 @@ class User < ApplicationRecord
   has_many :teams
   has_many :favorite_players, dependent: :destroy
   has_many :favorite_teams, dependent: :destroy
-  has_many :messages
-  has_many :enters
+  has_many :messages, dependent: :destroy
+  has_many :enters, dependent: :destroy
   has_many :player_posts
 
   devise :database_authenticatable, :registerable,

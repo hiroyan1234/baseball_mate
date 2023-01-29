@@ -18,7 +18,16 @@
             <h4 class="align-middle title">
               <%= link_to player_post.title, player_post_path(player_post) %>
             </h4>
-            <div class="author">: <%= link_to player_post.user.nickname, player_path(player_post.user_id) %></div>
+            <div class="author">
+              投稿者:
+              <% if player_post.user.nickname.present? %>
+                <%= link_to player_post.user.nickname, user_path(player_post.user) %>
+              <% else %>
+                <%= link_to user_path(player_post.user) do %>
+                  <%= player_post.user.last_name %> <%= player_post.user.first_name %>
+                <% end %>
+              <% end %>
+            </div>
             <ol class="sub pb-2">
               <li>投稿種類: <%= player_post.post_type_i18n %></li>
               <li>活動場所: <%= player_post.prefecture %> > <%= player_post.city %></li>
@@ -31,13 +40,15 @@
               </ol>
               <h5 class="text-r heart">
                 お気に入り
-                <% if current_user.already_player_favorited?(player_post) %>
-                  <%= link_to player_post_favorite_players_path(player_post), method: :delete do %>
-                    <i class="fas fa-heart"></i>
-                  <% end %>
-                <% else %>
-                  <%= link_to player_post_favorite_players_path(player_post), method: :post do %>
-                    <i class="far fa-heart"></i>
+                <% if user_signed_in? %>
+                  <% if current_user.already_player_favorited?(player_post) %>
+                    <%= link_to player_post_favorite_players_path(player_post), method: :delete do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to player_post_favorite_players_path(player_post), method: :post do %>
+                      <i class="far fa-heart"></i>
+                    <% end %>
                   <% end %>
                 <% end %>
               </h5>

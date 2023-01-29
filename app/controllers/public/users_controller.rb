@@ -3,6 +3,23 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @team_post = TeamPost.new
+    @currentUserEnter = Enter.where(user_id: current_user.id)
+    @userEnter = Enter.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @currentUserEnter.each do |cu|
+        @userEnter.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+      if @isRoom
+      else
+        @room = Room.new
+        @enter = Enter.new
+      end
+    end
   end
 
   def edit
