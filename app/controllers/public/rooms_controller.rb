@@ -3,8 +3,8 @@ class Public::RoomsController < ApplicationController
 
   def create
     @room = Room.create
-    @current_enter = Enter.create(user_id: current_user.id, room_id: @room.id)
-    @another_enter = Enter.create(params.require(:enter).permit(:user_id, :room_id).merge(room_id: @room.id))
+    @current_enter = Enter.create(room_id: @room.id, user_id: current_user.id)
+    @another_enter = Enter.create(enter_params)
     redirect_to room_path(@room.id)
   end
 
@@ -14,13 +14,18 @@ class Public::RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    if Enter.where(user_id: current_user.id,room_id: @room.id).present?
+    if Enter.where(user_id: current_user.id, room_id: @room.id).present?
       @messages = @room.messages
       @message = Message.new
       @enters = @room.enters
     else
       redirect_back(fallback_location: root_path)
     end
+  end
+
+  private
+  def enter_params
+    params.require(:room).permit(:user_id).merge(room_id: @room.id)
   end
 
 end

@@ -31,35 +31,15 @@
         </tr>
       </table>
       <div class="d-flex">
-      <% if @user == current_user %>
-        <div class="mr-4">
-          <%= link_to "新規投稿する", new_player_post_path, class: "btn btn-primary" %>
-        </div>
-        <div>
+        <div class="mr-4 mb-10">
           <%= link_to "プロフィールを編集する", edit_user_path, class: "btn btn-success" %>
-        </div>
-      <% else %>
-        <div class="center">
-          <% unless @user.id == current_user.id %>
-            <% if @isRoom == true %>
-              <%= link_to "メッセージを送る", room_path(@roomId), class: "btn btn-primary"  %>
-            <% else %>
-              <%= form_with model: @room, url: rooms_path, method: :post do |f| %>
-                <%= fields_for @entry do |e| %>
-                  <%= e.hidden_field :user_id, value: @user.id %>
-                <% end %>
-                <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-  <div class="container index-post">
+  <div class="container index-post mt-3">
     <% if @user.teams.present? %>
     <div class="d-flex mt-4">
       <h4 class="bg-light">登録チーム</h4>
@@ -83,39 +63,9 @@
                   <%= link_to team.name, team_path(team.id) %>
                 </h4>
               </div>
-                <div class="mr-4">
-                  <%= form_with model: @team_post, url: team_posts_new_path, method: :post do |f| %>
-                    <%= f.hidden_field :team_id, :value => team.id %>
-                    <%= f.submit "新規投稿", class: "btn btn-primary" %>
-                  <% end %>
-                </div>
-                <div class="">
-                  <%= link_to "編集する", edit_team_path(team), class: "btn btn-success" %>
-                </div>
             </div>
           </div>
         <% end %>
     </div>
     <% end %>
   </div>
-
-<div class"container">
-  <div class="d-flex align-items-center justify-content-center">
-    <div class="mr-4 mt-4">
-      <%= link_to "チームを登録する", new_team_path, class: "btn btn-success" %>
-    </div>
-  </div>
-</div>
-
-<% unless @user.id == current_user.id %>
-  <% if @is_room == true %>
-    <%= link_to "メッセージへ", room_path(@room_id) %>
-  <% else %>
-    <% form_with model: @room, local: true do |f| %>
-      <%= fields_for @entry do |r| %>
-        <%= r.hidden_field :user_id, value: @user.id %>
-      <% end %>
-      <%= f.submit "チャットを始める" %>
-    <% end %>
-   <% end %>
-<% end %>

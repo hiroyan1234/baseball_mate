@@ -29,6 +29,12 @@
           <% end %>
         </div>
         <nav class="row d-flex" style="height:50">
+        <% if admin_signed_in? %>
+          <li class="title list"><%= link_to "チーム一覧", admin_teams_path, class: "btn" %></li>
+          <li class="title list"><%= link_to "ユーザー一覧", admin_users_path, class: "btn" %></li>
+          <li class="list"><%= link_to "チーム投稿", admin_team_posts_path, class: "btn" %></li>
+          <li class="title list"><%= link_to "選手投稿", admin_player_posts_path, class: "btn" %></li>
+        <% end %>
           <li class="list"><%= link_to "チーム投稿", team_posts_path, class: "btn" %></li>
           <li class="title list"><%= link_to "選手投稿", player_posts_path, class: "btn" %></li>
         <% if user_signed_in? && !admin_signed_in? %>

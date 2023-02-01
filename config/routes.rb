@@ -22,7 +22,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :rooms, only: [:index, :show]
     get 'homes/top'
     resources :player_posts, only: [:index, :show, :destroy]
-    resources :team_posts, only: [:indes, :show, :destroy]
+    resources :team_posts, only: [:index, :show, :destroy]
   end
 
   scope module: :public do

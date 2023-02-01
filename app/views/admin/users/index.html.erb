@@ -1,0 +1,35 @@
+<div class="container d-flex mt-4 mb-4">
+  <h4 class="bg-light">ユーザー（選手）一覧</h4>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="search-form col-3">
+      <%= form_with url: team_search_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword, value: @keyword %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+
+    <div class="col-7">
+      <ul class="recruit-list">
+        <% @users.each do |user| %>
+          <li class="recruit new_rec">
+            <h4 class="align-middle title">
+            </h4>
+            <div class="author">
+              ユーザー名(ニックネーム):
+              <%= link_to admin_user_path(user), method: :get do %>
+                <%= user.last_name %> <%= user.first_name %>(<%= user.nickname %>)
+              <% end %>
+            </div>
+            <ol class="sub pb-2">
+              <li>メールアドレス: <%= user.email %></li>
+              <li>電話番号: <%= user.telephone_number %></li>
+            </ol>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

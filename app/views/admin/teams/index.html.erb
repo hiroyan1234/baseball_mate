@@ -1,0 +1,33 @@
+<div class="container d-flex mt-4 mb-4">
+  <h4 class="bg-light">チーム一覧</h4>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="search-form col-3">
+      <%= form_with url: team_search_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword, value: @keyword %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+
+    <div class="col-7">
+      <ul class="recruit-list">
+        <% @teams.each do |team| %>
+          <li class="recruit new_rec">
+            <h4 class="align-middle title">
+            </h4>
+            <div class="author">
+              チーム名:
+              <%= link_to team.name, admin_team_path(team) %>
+            </div>
+            <ol class="sub pb-2">
+              <li>平均年齢: <%= team.age %></li>
+              <li>紹介文: <%= team.introduction %></li>
+            </ol>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

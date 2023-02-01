@@ -44,7 +44,6 @@
 
 <div class"container mt-4">
   <div class="d-flex align-items-center justify-content-center">
-    <% if @team.user_id == current_user.id %>
     <div class="d-flex">
       <div class="mr-4">
         <%= link_to "チーム情報を編集する",  edit_team_path(@team.id), class: "btn btn-success" %>
@@ -56,8 +55,5 @@
         <% end %>
       </div>
     </div>
-    <% else %>
-    <%= link_to "コメントを送信する", edit_user_path, class: "btn btn-primary" %>
   </div>
-    <% end %>
 </div>
