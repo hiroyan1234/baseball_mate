@@ -29,6 +29,17 @@
   padding: 0;
 }
 
+.message-list {
+  list-style: none;
+  border-top: solid 1px #DDD;
+  margin: 0;
+  padding: 0;
+}
+
+.message {
+  border-bottom: solid 1px #DDD;
+}
+
 .team {
   border-bottom: solid 1px #DDD;
 }

@@ -9,7 +9,17 @@ class Public::RoomsController < ApplicationController
   end
 
   def index
-    @enters = Enter.all
+  @users = User.all
+  @current_enters = current_user.enters
+  myRoomIds = []
+
+  @current_enters.each do |enter|
+    myRoomIds << enter.room.id
+  end
+
+  @another_enters = Enter.where(room_id: myRoomIds).where('user_id != ?', current_user.id)
+    @keyword = params[:keyword]
+    render "index"
   end
 
   def show

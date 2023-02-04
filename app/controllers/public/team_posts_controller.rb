@@ -21,7 +21,7 @@ class Public::TeamPostsController < ApplicationController
   end
 
   def index
-    @team_posts = TeamPost.all
+    @team_posts = TeamPost.order("created_at DESC").page(params[:page])
     @tag_list = Tag.all
     if params[:tag_ids]
       @team_posts = [:name]

@@ -23,7 +23,7 @@ class Public::PlayerPostsController < ApplicationController
 
 
   def index
-    @player_posts = PlayerPost.all
+    @player_posts = PlayerPost.page(params[:page])
     @tag_list = Tag.all
     if params[:tag_ids]
       @player_posts = [:name]

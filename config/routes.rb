@@ -37,7 +37,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     post "team_posts/new/view" => "team_posts#new", as:"team_posts_new"
     resources :teams
     resources :player_posts
-    resources :players, only: [:index, :show]
+    resources :players, only: [:update, :edit, :show]
     resources :users, only: [:edit, :update, :show]
     resources :messages, only: [:create]
     resources :rooms, only: [:index, :show, :create]

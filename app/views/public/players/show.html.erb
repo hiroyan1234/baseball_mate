@@ -1,0 +1,127 @@
+<p id="notice"></p>
+<div class="container d-flex mt-4">
+  <h4 class="bg-light">
+    <% if @user.nickname.present? %>
+      <%= @user.nickname %>さんのプロフィール
+    <% else %>
+      <%= @user.last_name %><%= @user.first_name %>さんのプロフィール
+    <% end %>
+  </h4>
+</div>
+
+<div class="container mb-4">
+  <div class="row">
+    <div class="col-5">
+      <% if @user.image.attached? %>
+        <%= image_tag @user.image, size: "200x200" %>
+      <% else %>
+        <%= image_tag 'default-image', size: "200x200" %>
+      <% end %>
+    </div>
+    <div class="col-7">
+      <table class="table">
+        <tr>
+          <th style="width :20%">名前(年齢)</th><td><%= @user.last_name %> <%= @user.first_name %>(<%= @user.age %>歳)</td>
+        </tr>
+        <tr>
+          <th>ニックネーム</th><td><%= @user.nickname %></td>
+        </tr>
+        <tr>
+          <th>性別</th>
+          <td>
+            <%= @user.sex_i18n %>
+          </td>
+        </tr>
+        <tr>
+          <th>自己紹介</th><td><%= @user.introduction %></td>
+        </tr>
+      </table>
+      <div class="d-flex">
+      <% if @user == current_user %>
+        <div class="mr-4">
+          <%= link_to "新規投稿する", new_player_post_path, class: "btn btn-primary" %>
+        </div>
+        <div>
+          <%= link_to "プロフィールを編集する", edit_player_path, class: "btn btn-success" %>
+        </div>
+      <% else %>
+        <div class="center">
+          <% unless @user.id == current_user.id %>
+            <% if @isRoom == true %>
+              <%= link_to "メッセージを送る", room_path(@roomId), class: "btn btn-primary"  %>
+            <% else %>
+              <%= form_with model: @room, url: rooms_path, method: :post do |f| %>
+                <%= fields_for @entry do |e| %>
+                  <%= e.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="container index-post">
+    <% if @user.teams.present? %>
+    <div class="d-flex mt-4">
+      <h4 class="bg-light">登録チーム</h4>
+    </div>
+    <div class="mt-4 team-list row d-flex">
+        <% @user.teams.each do |team| %>
+          <div class="mt-4 container team">
+            <div class="row">
+              <div class="text-l">
+                <h4 class="space">チーム名</h4>
+              </div>
+              <div class="mb-4 text-l">
+                <% if team.image.attached? %>
+                  <%= image_tag team.image, size: "35x35" %>
+                <% else %>
+                  <%= image_tag 'default-image', size: "35x35" %>
+                <% end %>
+              </div>
+              <div class="pb-2 ml-3 text-l mr-auto">
+                <h4>
+                  <%= link_to team.name, team_path(team.id) %>
+                </h4>
+              </div>
+                <div class="mr-4">
+                  <%= form_with model: @team_post, url: team_posts_new_path, method: :post do |f| %>
+                    <%= f.hidden_field :team_id, :value => team.id %>
+                    <%= f.submit "新規投稿", class: "btn btn-primary" %>
+                  <% end %>
+                </div>
+                <div class="">
+                  <%= link_to "編集する", edit_team_path(team), class: "btn btn-success" %>
+                </div>
+            </div>
+          </div>
+        <% end %>
+    </div>
+    <% end %>
+  </div>
+
+<div class"container">
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="mr-4 mt-4">
+      <%= link_to "チームを登録する", new_team_path, class: "btn btn-success" %>
+    </div>
+  </div>
+</div>
+
+<% unless @user.id == current_user.id %>
+  <% if @is_room == true %>
+    <%= link_to "メッセージへ", room_path(@room_id) %>
+  <% else %>
+    <% form_with model: @room, local: true do |f| %>
+      <%= fields_for @entry do |r| %>
+        <%= r.hidden_field :user_id, value: @user.id %>
+      <% end %>
+      <%= f.submit "チャットを始める" %>
+    <% end %>
+   <% end %>
+<% end %>

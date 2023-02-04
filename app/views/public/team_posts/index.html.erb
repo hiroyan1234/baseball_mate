@@ -15,7 +15,7 @@
       <ul class="recruit-list">
         <% @team_posts.each do |team_post| %>
           <li class="recruit new_rec">
-            <h4 class="align-middle title">
+            <h4 class="align-middle mt-3">
               <%= link_to team_post.title, team_post_path(team_post) %>
             </h4>
             <div class="author">チーム名: <%= link_to team_post.team.name, team_path(team_post.team.id) %></div>
@@ -29,7 +29,7 @@
                   <span class="tag"><%= link_to tag.name, team_tag_search_path(tag_id: tag.id) %></span>
                 <% end %>
               </ol>
-              <h5 class="text-r heart">
+              <h5 class="text-r heart mb-3">
                 お気に入り
                 <% if user_signed_in? %>
                   <% if current_user.already_team_favorited?(team_post) %>
@@ -46,6 +46,7 @@
             </div>
           </li>
         <% end %>
+        <%= paginate @team_posts %>
       </ul>
     </div>
   </div>

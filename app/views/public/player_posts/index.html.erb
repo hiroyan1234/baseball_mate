@@ -15,7 +15,7 @@
       <ul class="recruit-list">
         <% @player_posts.each do |player_post| %>
           <li class="recruit new_rec">
-            <h4 class="align-middle title">
+            <h4 class="align-middle mt-3">
               <%= link_to player_post.title, player_post_path(player_post) %>
             </h4>
             <div class="author">
@@ -23,7 +23,7 @@
               <% if player_post.user.nickname.present? %>
                 <%= link_to player_post.user.nickname, user_path(player_post.user) %>
               <% else %>
-                <%= link_to user_path(player_post.user) do %>
+                <%= link_to player_path(player_post.user) do %>
                   <%= player_post.user.last_name %> <%= player_post.user.first_name %>
                 <% end %>
               <% end %>
@@ -38,7 +38,7 @@
                   <span class="tag"><%= link_to tag.name, player_tag_search_path(tag_id: tag.id) %></span>
                 <% end %>
               </ol>
-              <h5 class="text-r heart">
+              <h5 class="text-r heart mb-3">
                 お気に入り
                 <% if user_signed_in? %>
                   <% if current_user.already_player_favorited?(player_post) %>
@@ -55,6 +55,7 @@
             </div>
           </li>
         <% end %>
+        <%= paginate @player_posts %>
       </ul>
     </div>
   </div>
