@@ -23,26 +23,10 @@
               <li>投稿種類: <%= team_post.post_type_i18n %></li>
               <li>活動場所: <%= team_post.prefecture %> > <%= team_post.city %></li>
             </ol>
-            <div>
-              <ol class="text-l">
-                <% team_post.tags.each do |tag| %>
-                  <span class="tag"><%= link_to tag.name, team_tag_search_path(tag_id: tag.id) %></span>
-                <% end %>
-              </ol>
-              <h5 class="text-r heart mb-3">
-                <% if user_signed_in? %>
-                  お気に入り
-                  <% if current_user.already_team_favorited?(team_post) %>
-                    <%= link_to team_post_favorite_teams_path(team_post), method: :delete do %>
-                      <i class="fas fa-heart"></i>
-                    <% end %>
-                  <% else %>
-                    <%= link_to team_post_favorite_teams_path(team_post), method: :post do %>
-                      <i class="far fa-heart"></i>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </h5>
+            <div class="mb-10">
+              <% team_post.tags.each do |tag| %>
+                <span class="tag"><%= link_to tag.name, team_tag_search_path(tag_id: tag.id) %></span>
+              <% end %>
             </div>
           </li>
         <% end %>

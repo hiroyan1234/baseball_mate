@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="d-flex align-items-center justify-content-center" style="height: 300px">
+    <h4><strong>本当に退会しますか？</strong></h4>
+  </div>
+</div>
+
+<div class="container mb-5">
+  <div class="d-flex align-items-center justify-content-center text-center">
+    <h4>退会すると、会員登録情報や<br>
+      これまでの購入履歴が閲覧できなくなります。<br>
+      退会する場合は、「退会する」をクリックしてください。
+    </h4>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="mr-4">
+      <%= link_to "退会しない", edit_user_path(@user.id), class: "btn btn-primary" %>
+    </div>
+    <%= form_with model: @user, url: users_withdrawal_path, method: :patch do |f| %>
+      <%= hidden_field :is_deleted, :value => true %>
+      <%= f.submit "退会する", class: "btn btn-danger", data: { confirm: "本当に退会しますか？"} %>
+    <% end %>
+  </div>
+</div>

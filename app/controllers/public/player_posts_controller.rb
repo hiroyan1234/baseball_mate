@@ -19,6 +19,24 @@ class Public::PlayerPostsController < ApplicationController
   def show
     @player_post = PlayerPost.find(params[:id])
     @player_post_tags = @player_post.tags
+    @user = @player_post.user
+    @currentUserEnter = Enter.where(user_id: current_user.id)
+    @userEnter = Enter.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @currentUserEnter.each do |cu|
+        @userEnter.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+      if @isRoom
+      else
+        @room = Room.new
+        @enter = Enter.new
+      end
+    end
   end
 
 

@@ -10,6 +10,7 @@ class Public::RoomsController < ApplicationController
 
   def index
   @users = User.all
+  @rooms = Room.all
   @current_enters = current_user.enters
   myRoomIds = []
 
@@ -34,8 +35,9 @@ class Public::RoomsController < ApplicationController
   end
 
   private
+  
   def enter_params
-    params.require(:room).permit(:user_id).merge(room_id: @room.id)
+    params.require(:enter).permit(:user_id).merge(room_id: @room.id)
   end
 
 end

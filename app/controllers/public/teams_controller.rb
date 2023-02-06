@@ -27,7 +27,7 @@ class Public::TeamsController < ApplicationController
     @user = current_user
     if @team.save
       flash[:notice] = "チーム登録完了しました"
-      redirect_to user_path(current_user.id)
+      redirect_to player_path(current_user.id)
     else
       render :new
     end

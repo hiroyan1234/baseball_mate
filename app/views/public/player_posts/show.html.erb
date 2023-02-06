@@ -48,8 +48,18 @@
       <%= form_with model: @player_post, url: player_post_path, method: :delete do |f| %>
         <%= f.submit "コメントを削除する", class: "btn btn-danger" %>
       <% end %>
-    <% else %>
-      <%= link_to "コメントを送信する", edit_user_path, class: "btn btn-primary" %>
-  </div>
     <% end %>
+    <% unless @user.id == current_user.id %>
+      <% if @isRoom == true %>
+        <%= link_to "メッセージを送る", room_path(@roomId), class: "btn btn-primary"  %>
+      <% else %>
+        <%= form_with model: @room, url: rooms_path, method: :post do |f| %>
+          <%= fields_for @enter do |e| %>
+            <%= e.hidden_field :user_id, value: @user.id %>
+          <% end %>
+          <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

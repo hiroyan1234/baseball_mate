@@ -5,7 +5,6 @@
   <h4 class="rooms-title">メッセージ相手</h4>
   <% @enters.each do |enter| %>
     <div class="d-flex">
-
       <% if enter.user == current_user %>
       <% else %>
         <div>
@@ -25,7 +24,6 @@
             <% end %>
           </div>
       <% end %>
-
     </div>
   <% end %>
   <hr>
@@ -33,17 +31,36 @@
     <div class="chat">
       <% if @messages.present? %>
         <% @messages.each do |message| %>
-          <div class="chat-box d-flex mb-10">
-            <div class="chat-face">
-              <% if message.user.image.attached? %>
-                <%= image_tag message.user.image, class:"user-image", size: "35x35" %>
-              <% else %>
-                <%= image_tag "default-image", class:"user-image", size: "35x35" %>
-              <% end %>
-            </div>
-            <div class="chat-hukidashi"> <strong><%= message.content %></strong><br>
-              <%= message.created_at.strftime("%Y-%m-%d %H:%M")%>
-            </div>
+          <div class="mb-20">
+            <% if message.user == current_user %>
+              <div class="d-flex">
+                <div class="pad-left"></div>
+                <div class="width-font right">
+                  <div class="width-font mr-3"> <strong><%= message.content %></strong></div>
+                </div>
+                <div class="image-right">
+                  <% if message.user.image.attached? %>
+                    <%= image_tag message.user.image, class:"user-image", size: "35x35" %>
+                  <% else %>
+                    <%= image_tag "default-image", class:"user-image", size: "35x35" %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="date mr-50"><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+            <% else %>
+              <div class="d-flex">
+                <div class="mr-3">
+                  <% if message.user.image.attached? %>
+                    <%= image_tag message.user.image, class:"user-image", size: "35x35" %>
+                  <% else %>
+                    <%= image_tag "default-image", class:"user-image", size: "35x35" %>
+                  <% end %>
+                </div>
+                <div class=""> <strong><%= message.content %></strong></div>
+                <div class="pad-right"></div>
+              </div>
+              <div class="ml-50"><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+            <% end %>
           </div>
         <% end %>
       <% end %>
