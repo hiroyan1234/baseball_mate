@@ -11,4 +11,17 @@ class Admin::TeamPostsController < ApplicationController
       @team_posts.uniq!
     end
   end
+  
+  def show
+    @team_post = TeamPost.find(params[:id])
+  end
+  
+  def destroy
+    @team_post = TeamPost.find(params[:id])
+    if @team_post.delete
+      redirect_to admin_team_posts
+    else
+      render admin_team_post(@team_post)
+    end
+  end
 end

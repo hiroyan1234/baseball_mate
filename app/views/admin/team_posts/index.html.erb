@@ -16,9 +16,9 @@
         <% @team_posts.each do |team_post| %>
           <li class="recruit new_rec">
             <h4 class="align-middle mt-3">
-              <%= link_to team_post.title, team_post_path(team_post) %>
+              <%= link_to team_post.title, admin_team_post_path(team_post) %>
             </h4>
-            <div class="author">チーム名: <%= link_to team_post.team.name, team_path(team_post.team.id) %></div>
+            <div class="author">チーム名: <%= link_to team_post.team.name, admin_team_path(team_post.team.id) %></div>
             <ol class="sub pb-2">
               <li>投稿種類: <%= team_post.post_type_i18n %></li>
               <li>活動場所: <%= team_post.prefecture %> > <%= team_post.city %></li>

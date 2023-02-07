@@ -10,4 +10,17 @@ class Admin::PlayerPostsController < ApplicationController
       @player_posts.uniq!
     end
   end
+  
+  def show
+    @player_post = PlayerPost.find(params[:id])
+  end
+  
+  def destroy
+    @player_post = PlayerPost.find(params[:id])
+    if @player_post.delete
+      redirect_to admin_player_posts
+    else
+      render admin_player_post(@player_post)
+    end
+  end
 end

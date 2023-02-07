@@ -16,14 +16,14 @@
         <% @player_posts.each do |player_post| %>
           <li class="recruit new_rec">
             <h4 class="align-middle mt-3">
-              <%= link_to player_post.title, player_post_path(player_post) %>
+              <%= link_to player_post.title, admin_player_post_path(player_post) %>
             </h4>
             <div class="author">
               投稿者:
               <% if player_post.user.nickname.present? %>
-                <%= link_to player_post.user.nickname, user_path(player_post.user) %>
+                <%= link_to player_post.user.nickname, admin_user_path(player_post.user) %>
               <% else %>
-                <%= link_to player_path(player_post.user) do %>
+                <%= link_to admin_user_path(player_post.user) do %>
                   <%= player_post.user.last_name %> <%= player_post.user.first_name %>
                 <% end %>
               <% end %>
