@@ -1,9 +1,15 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
+  
   def show
     @user = User.find(params[:id])
   end
 
   def update
+    user_id = params[:id].to_i
+    unless user_id == current_user.id
+      redirect_to user_path(current_user)
+    end
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "ユーザー情報を更新しました"
@@ -14,6 +20,10 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
+    user_id = params[:id].to_i
+    unless user_id == current_user.id
+      redirect_to user_path(current_user)
+    end
     @user = User.find(params[:id])
   end
 

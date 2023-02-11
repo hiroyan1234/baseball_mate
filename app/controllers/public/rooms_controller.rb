@@ -24,6 +24,16 @@ class Public::RoomsController < ApplicationController
   end
 
   def show
+    def block_return
+    room_id = params[:id].to_i
+    enters = Room.find(room_id).enters
+    enters.each do |enter|
+      return if enter.user_id == current_user.id
+      end
+      redirect_to rooms_path
+    end
+    block_return
+    
     @room = Room.find(params[:id])
     if Enter.where(user_id: current_user.id, room_id: @room.id).present?
       @messages = @room.messages
@@ -35,9 +45,14 @@ class Public::RoomsController < ApplicationController
   end
 
   private
-  
+
   def enter_params
     params.require(:enter).permit(:user_id).merge(room_id: @room.id)
   end
 
+  def move_to_signed_in
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
+  end
 end

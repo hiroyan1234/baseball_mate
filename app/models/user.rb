@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :enters, dependent: :destroy
   has_many :player_posts
   has_many :rooms, through: :enters, dependent: :destroy
+  has_many :team_posts, through: :teams, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

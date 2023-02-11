@@ -1,0 +1,45 @@
+<div class="container d-flex mt-4 mb-4">
+  <h4 class="bg-light">メッセージ一覧</h4>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="search-form col-3">
+      <%= form_with url: team_search_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword, value: @keyword %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+    <div class="col-7">
+      <ul class="message-list">
+        <% @rooms.each do |room| %>
+          <%= link_to admin_room_path(room) do %>
+          <div class="message new_rec mb-10">
+            <div class="d-flex mb-10">
+              <div class="align-middle mt-3">
+                <% if another_enter.user.image.attached? %>
+                  <%= image_tag another_enter.user.image, size: "45x45" %>
+                <% else %>
+                  <%= image_tag "default-image", size: "45x45" %>
+                <% end %>
+              </div>
+              <div>
+                <li class="mt-3 ml-3">
+                  <% if another_enter.user.nickname.present? %>
+                    <%= another_enter.user.nickname %>
+                  <% else %>
+                    <%= another_enter.user.last_name %> <%= another_enter.user.first_name %>
+                  <% end %>
+                </li>
+                <li class="ml-3">
+                  <%= another_enter.room.messages.order(created_at: :desc).take.try(:content) %>
+                </li>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

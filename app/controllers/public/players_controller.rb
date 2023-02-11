@@ -22,10 +22,18 @@ class Public::PlayersController < ApplicationController
   end
 
   def edit
+    user_id = params[:id].to_i
+    unless user_id == current_user.id
+      redirect_to player_path(current_user)
+    end
     @user = User.find(params[:id])
   end
 
   def update
+    user_id = params[:id].to_i
+    unless user_id == current_user.id
+      redirect_to player_path(current_user)
+    end
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "情報を更新しました"

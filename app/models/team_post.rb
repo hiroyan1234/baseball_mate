@@ -4,6 +4,7 @@ class TeamPost < ApplicationRecord
   has_many :favorite_teams, dependent: :destroy
   has_many :tag_teams, dependent: :destroy
   has_many :tags, through: :tag_teams, dependent: :destroy
+  
 
   validates :content, presence: true
   validates :post_type, presence: true

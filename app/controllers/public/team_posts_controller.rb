@@ -51,6 +51,11 @@ class Public::TeamPostsController < ApplicationController
   end
 
   def destroy
+    team_post_id = params[:id].to_i
+    user_id = TeamPost.find(team_post_id).team.user_id
+    unless user_id == current_user.id
+      redirect_to team_posts_path
+    end
     @team_post = TeamPost.find(params[:id])
     if @team_post.delete
       redirect_to user_path(current_user.id)

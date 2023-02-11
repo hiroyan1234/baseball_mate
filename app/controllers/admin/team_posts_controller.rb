@@ -1,4 +1,5 @@
 class Admin::TeamPostsController < ApplicationController
+  before_action :admin_signed_in
 
   def index
     @team_posts = TeamPost.order("created_at DESC").page(params[:page])
@@ -24,4 +25,13 @@ class Admin::TeamPostsController < ApplicationController
       render admin_team_post(@team_post)
     end
   end
+  
+  private
+
+  def admin_signed_in
+    unless admin_signed_in?
+      redirect_to new_admin_session_path
+    end
+  end
+  
 end

@@ -1,4 +1,6 @@
 class Public::FavoritePlayersController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     @favorite_player = current_user.favorite_players.create(player_post_id: params[:player_post_id])
     redirect_back(fallback_location: root_path)
@@ -13,5 +15,11 @@ class Public::FavoritePlayersController < ApplicationController
 
   def index
     @favorite_players = current_user.favorite_players
+  end
+  
+  def move_to_signed_in
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 end

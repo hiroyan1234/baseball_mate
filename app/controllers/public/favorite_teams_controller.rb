@@ -1,4 +1,6 @@
 class Public::FavoriteTeamsController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     @favorite_team = current_user.favorite_teams.create(team_post_id: params[:team_post_id])
     redirect_back(fallback_location: root_path)
@@ -13,5 +15,11 @@ class Public::FavoriteTeamsController < ApplicationController
   
   def index
     @favorite_teams = current_user.favorite_teams
+  end
+  
+  def move_to_signed_in
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 end

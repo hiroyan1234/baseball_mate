@@ -10,10 +10,20 @@ class Public::TeamsController < ApplicationController
   end
 
   def edit
+    team_id = params[:id].to_i
+    user_id = Team.find(team_id).user_id
+    unless user_id == current_user.id
+      redirect_to player_path(current_user)
+    end
     @team = Team.find(params[:id])
   end
 
   def update
+    team_id = params[:id].to_i
+    user_id = Team.find(team_id).user_id
+    unless user_id == current_user.id
+      redirect_to player_path(current_user)
+    end
     @team = Team.find(params[:id])
     if @team.update(team_params)
       redirect_to team_path(@team.id)

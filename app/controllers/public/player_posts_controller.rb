@@ -52,6 +52,20 @@ class Public::PlayerPostsController < ApplicationController
     end
   end
 
+  def destroy
+    player_post_id = params[:id].to_i
+    user_id = PlayerPost.find(player_post_id).user_id
+    unless user_id == current_user.id
+      redirect_to player_posts_path
+    end
+    @player_post = PlayerPost.find(params[:id])
+    if @player_post.delete
+      redirect_to user_path(current_user.id)
+    else
+      render :show
+    end
+  end
+
   def search
     @player_posts = PlayerPost.search(params[:keyword])
     @keyword = params[:keyword]
