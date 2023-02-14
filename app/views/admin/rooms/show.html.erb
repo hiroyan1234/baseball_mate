@@ -5,25 +5,22 @@
   <h4 class="rooms-title">メッセージ相手</h4>
   <% @enters.each do |enter| %>
     <div class="d-flex">
-      <% if enter.user == current_user %>
-      <% else %>
-        <div>
-          <% if enter.user.image.attached? %>
-            <%= image_tag enter.user.image, class:"user-image" %>
-          <% else %>
-            <%= image_tag "default-image", class:"user-image" %>
+      <div>
+        <% if enter.user.image.attached? %>
+          <%= image_tag enter.user.image, class:"user-image" %>
+        <% else %>
+          <%= image_tag "default-image", class:"user-image" %>
+        <% end %>
+      </div>
+      <div>
+        <% if enter.user.nickname == true %>
+          <%= link_to enter.user.nickname, user_path(enter.user) %>さん
+        <% else %>
+          <%= link_to user_path(enter.user) do %>
+            <%= enter.user.last_name %> <%= enter.user.first_name %>さん
           <% end %>
-        </div>
-          <div>
-            <% if enter.user.nickname == true %>
-              <%= link_to enter.user.nickname, user_path(enter.user) %>さん
-            <% else %>
-              <%= link_to user_path(enter.user) do %>
-                <%= enter.user.last_name %> <%= enter.user.first_name %>さん
-              <% end %>
-            <% end %>
-          </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   <% end %>
   <hr>

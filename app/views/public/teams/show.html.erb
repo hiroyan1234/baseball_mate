@@ -44,16 +44,18 @@
 
 <div class"container mt-4">
   <div class="d-flex align-items-center justify-content-center">
-    <% if @team.user_id == current_user.id %>
-    <div class="d-flex">
-      <div class="mr-4">
-        <%= link_to "チーム情報を編集する",  edit_team_path(@team.id), class: "btn btn-success" %>
-      </div>
-      <div>
-        <%= form_with model: @team_post, url: team_posts_new_path, method: :post do |f| %>
-          <%= f.hidden_field :team_id, :value => @team.id %>
-          <%= f.submit "新規投稿", class: "btn btn-primary" %>
-        <% end %>
+    <% if user_signed_in? %>
+      <% if @team.user_id == current_user.id %>
+      <div class="d-flex">
+        <div class="mr-4">
+          <%= link_to "チーム情報を編集する",  edit_team_path(@team.id), class: "btn btn-success" %>
+        </div>
+        <div>
+          <%= form_with model: @team_post, url: team_posts_new_path, method: :post do |f| %>
+            <%= f.hidden_field :team_id, :value => @team.id %>
+            <%= f.submit "新規投稿", class: "btn btn-primary" %>
+          <% end %>
+      <% end %>
     <% end %>
       </div>
     </div>

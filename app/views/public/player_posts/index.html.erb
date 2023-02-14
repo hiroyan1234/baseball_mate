@@ -33,25 +33,11 @@
               <li>活動場所: <%= player_post.prefecture %> > <%= player_post.city %></li>
             </ol>
             <div>
-              <ol class="text-l">
+              <ol class="mb-3">
                 <% player_post.tags.each do |tag| %>
                   <span class="tag"><%= link_to tag.name, player_tag_search_path(tag_id: tag.id) %></span>
                 <% end %>
               </ol>
-              <h5 class="text-r heart mb-3">
-                <% if user_signed_in? %>
-                  お気に入り
-                  <% if current_user.already_player_favorited?(player_post) %>
-                    <%= link_to player_post_favorite_players_path(player_post), method: :delete do %>
-                      <i class="fas fa-heart"></i>
-                    <% end %>
-                  <% else %>
-                    <%= link_to player_post_favorite_players_path(player_post), method: :post do %>
-                      <i class="far fa-heart"></i>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </h5>
             </div>
           </li>
         <% end %>

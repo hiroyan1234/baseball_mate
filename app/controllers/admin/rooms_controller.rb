@@ -7,10 +7,8 @@ class Admin::RoomsController < ApplicationController
   
   def show
     @room = Room.find(params[:id])
-    @enters = Enter.all
-    @enters.each do |enter|
-      @user1 = enter.user_id
-      @user2
+    @messages = @room.messages
+    @enters = @room.enters
   end
   
   private

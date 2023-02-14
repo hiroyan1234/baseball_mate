@@ -4,7 +4,7 @@
     <% if @user.nickname.present? %>
       <%= @user.nickname %>さんのプロフィール
     <% else %>
-      <%= @user.last_name %><%= @user.first_name %>さんのプロフィール
+      <%= @user.last_name %> <%= @user.first_name %>さんのプロフィール
     <% end %>
   </h4>
 </div>
@@ -40,29 +40,31 @@
         </tr>
       </table>
       <div class="d-flex">
-      <% if @user == current_user %>
-        <div class="mr-4">
-          <%= link_to "新規投稿する", new_player_post_path, class: "btn btn-primary" %>
-        </div>
-        <div>
-          <%= link_to "プロフィールを編集する", edit_player_path, class: "btn btn-success" %>
-        </div>
-      <% else %>
-        <div class="center">
-          <% unless @user.id == current_user.id %>
-            <% if @isRoom == true %>
-              <%= link_to "メッセージを送る", room_path(@roomId), class: "btn btn-primary"  %>
-            <% else %>
-              <%= form_with model: @room, url: rooms_path, method: :post do |f| %>
-                <%= fields_for @enter do |e| %>
-                  <%= e.hidden_field :user_id, value: @user.id %>
+      <% if user_signed_in? %>
+        <% if @user == current_user %>
+          <div class="mr-4">
+            <%= link_to "新規投稿する", new_player_post_path, class: "btn btn-primary" %>
+          </div>
+          <div>
+            <%= link_to "プロフィールを編集する", edit_player_path, class: "btn btn-success" %>
+          </div>
+        <% else %>
+          <div class="center">
+            <% unless @user.id == current_user.id %>
+              <% if @isRoom == true %>
+                <%= link_to "メッセージを送る", room_path(@roomId), class: "btn btn-primary"  %>
+              <% else %>
+                <%= form_with model: @room, url: rooms_path, method: :post do |f| %>
+                  <%= fields_for @enter do |e| %>
+                    <%= e.hidden_field :user_id, value: @user.id %>
+                  <% end %>
+                  <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
                 <% end %>
-                <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
               <% end %>
             <% end %>
-          <% end %>
         <% end %>
-        </div>
+          </div>
+      <% end %>
       </div>
     </div>
   </div>

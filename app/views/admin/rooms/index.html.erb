@@ -17,22 +17,24 @@
           <div class="message new_rec mb-10">
             <div class="d-flex mb-10">
               <div class="align-middle mt-3">
-                <% if another_enter.user.image.attached? %>
-                  <%= image_tag another_enter.user.image, size: "45x45" %>
-                <% else %>
-                  <%= image_tag "default-image", size: "45x45" %>
-                <% end %>
+                <% room.enters.each do |enter| %>
+                  <% if enter.user.image.attached? %>
+                    <%= image_tag enter.user.image, size: "45x45" %>
+                  <% else %>
+                    <%= image_tag "default-image", size: "45x45" %>
+                  <% end %>
               </div>
               <div>
                 <li class="mt-3 ml-3">
-                  <% if another_enter.user.nickname.present? %>
-                    <%= another_enter.user.nickname %>
-                  <% else %>
-                    <%= another_enter.user.last_name %> <%= another_enter.user.first_name %>
-                  <% end %>
+                    <% if enter.user.nickname.present? %>
+                      <%= enter.user.nickname %>
+                    <% else %>
+                      <%= enter.user.last_name %> <%= enter.user.first_name %>
+                    <% end %>
                 </li>
+                <% end %>
                 <li class="ml-3">
-                  <%= another_enter.room.messages.order(created_at: :desc).take.try(:content) %>
+                  <%= room.messages.order(created_at: :desc).take.try(:content) %>
                 </li>
               </div>
             </div>
@@ -40,6 +42,7 @@
           <% end %>
         <% end %>
       </ul>
+      <%= paginate @rooms %>
     </div>
   </div>
 </div>
