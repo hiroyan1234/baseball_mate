@@ -1,5 +1,5 @@
 <p id="notice"></p>
-<div class="container d-flex pl-5 mb-3">
+<div class="container d-flex mb-3">
   <h4 class="bg-light">投稿内容詳細</h4>
 </div>
 
@@ -13,21 +13,32 @@
       <% end %>
     </div>
     <div class="col-6">
-      <div>
-      <% if current_user.already_player_favorited?(@player_post) %>
-        <%= link_to player_post_favorite_players_path(@player_post), method: :delete do %>
-          <i class="fas fa-heart"></i>
-        <% end %>
-      <% else %>
-        <%= link_to player_post_favorite_players_path(@player_post), method: :post do %>
-          <i class="far fa-heart"></i>
+      <h5>
+      <% if user_signed_in? %>
+        お気に入り
+        <% if current_user.already_player_favorited?(@player_post) %>
+          <%= link_to player_post_favorite_players_path(@player_post), method: :delete do %>
+            <i class="fas fa-heart"></i>
+          <% end %>
+        <% else %>
+          <%= link_to player_post_favorite_players_path(@player_post), method: :post do %>
+            <i class="far fa-heart"></i>
+          <% end %>
         <% end %>
       <% end %>
-        <%= @player_post.favorite_players.count %>
-      </div>
+      </h5>
       <table class="table">
         <tr>
-          <th>投稿者</th><td><%= @player_post.user.last_name %></td>
+          <th>投稿者</th>
+          <td>
+            <% if @player_post.user.nickname.present? %>
+              <%= link_to @player_post.user.nickname, user_path(@player_post.user) %>
+            <% else %>
+              <%= link_to player_path(@player_post.user) do %>
+                <%= @player_post.user.last_name %> <%= @player_post.user.first_name %>
+              <% end %>
+            <% end %>
+          </td>
         </tr>
         <tr>
           <th>投稿種類</th><td><%= @player_post.post_type_i18n %></td>
@@ -45,22 +56,25 @@
 <div class"container mt-4">
   <div class="d-flex align-items-center justify-content-center">
     <% if user_signed_in? %>
-    <% if @player_post.user.id == current_user.id %>
-      <%= form_with model: @player_post, url: player_post_path, method: :delete do |f| %>
-        <%= f.submit "コメントを削除する", class: "btn btn-danger" %>
-      <% end %>
-    <% end %>
-    <% unless @user.id == current_user.id %>
-      <% if @isRoom == true %>
-        <%= link_to "メッセージを送る", room_path(@roomId), class: "btn btn-primary"  %>
-      <% else %>
-        <%= form_with model: @room, url: rooms_path, method: :post do |f| %>
-          <%= fields_for @enter do |e| %>
-            <%= e.hidden_field :user_id, value: @user.id %>
-          <% end %>
-          <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
+      <% if @player_post.user.id == current_user.id %>
+        <%= form_with model: @player_post, url: player_post_path, method: :delete do |f| %>
+          <%= f.submit "コメントを削除する", class: "btn btn-danger" %>
         <% end %>
       <% end %>
+      <% unless @user.id == current_user.id %>
+        <% if @isRoom == true %>
+          <%= link_to "メッセージを送る", room_path(@roomId), class: "btn btn-primary"  %>
+        <% else %>
+          <%= form_with model: @room, url: rooms_path, method: :post do |f| %>
+            <%= fields_for @enter do |e| %>
+              <%= e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+            <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to "メッセージを送る", new_user_session_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

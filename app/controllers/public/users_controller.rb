@@ -45,9 +45,4 @@ class Public::UsersController < ApplicationController
     params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :telephone_number, :sex, :is_deleted, :age, :nickname, :introduction, :image, :password, :password_confirmation, :is_deleted)
   end
   
-  def move_to_signed_in
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
-  end
 end

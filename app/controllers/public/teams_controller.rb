@@ -1,4 +1,6 @@
 class Public::TeamsController < ApplicationController
+  before_action :authenticate_user!,except: [:show]
+
   def new
     @team = Team.new
     @user = current_user
@@ -47,5 +49,11 @@ class Public::TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:user_id, :name, :age, :introduction, :image)
+  end
+
+  def move_to_signed_in
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 end

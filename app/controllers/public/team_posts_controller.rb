@@ -1,4 +1,6 @@
 class Public::TeamPostsController < ApplicationController
+  before_action :authenticate_user!,except: [:show, :index, :search, :tag_search]
+  
   def new
     @team_post = TeamPost.new(team_post_params)
   end
