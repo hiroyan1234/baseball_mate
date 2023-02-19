@@ -3,8 +3,8 @@ class TeamPost < ApplicationRecord
   belongs_to :team
   has_many :favorite_teams, dependent: :destroy
   has_many :tag_teams, dependent: :destroy
-  has_many :tags, through: :tag_teams, dependent: :destroy
-  
+  has_many :tags, through: :tag_teams
+
 
   validates :content, presence: true
   validates :post_type, presence: true

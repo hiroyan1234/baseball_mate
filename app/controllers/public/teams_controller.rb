@@ -27,8 +27,9 @@ class Public::TeamsController < ApplicationController
       redirect_to player_path(current_user)
     end
     @team = Team.find(params[:id])
+    @user = current_user
     if @team.update(team_params)
-      redirect_to team_path(@team.id)
+      redirect_to player_path(@user)
     else
       render :edit
     end
@@ -39,7 +40,7 @@ class Public::TeamsController < ApplicationController
     @user = current_user
     if @team.save
       flash[:notice] = "チーム登録完了しました"
-      redirect_to player_path(current_user.id)
+      redirect_to player_path(@user)
     else
       render :new
     end

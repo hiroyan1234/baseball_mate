@@ -10,7 +10,7 @@ class Public::PlayerPostsController < ApplicationController
     if @player_post.save
       @player_post.save_tag(tag_list)
       flash[:notice] = "投稿完了しました"
-      redirect_to player_post_path(@player_post)
+      redirect_to player_posts_path
     else
       render :new
     end
@@ -61,8 +61,8 @@ class Public::PlayerPostsController < ApplicationController
       redirect_to player_posts_path
     end
     @player_post = PlayerPost.find(params[:id])
-    if @player_post.delete
-      redirect_to user_path(current_user.id)
+    if @player_post.destroy
+      redirect_to player_posts_path
     else
       render :show
     end

@@ -16,9 +16,9 @@
         </div>
           <div>
             <% if enter.user.nickname == true %>
-              <%= link_to enter.user.nickname, user_path(enter.user) %>さん
+              <%= link_to enter.user.nickname, player_path(enter.user) %>さん
             <% else %>
-              <%= link_to user_path(enter.user) do %>
+              <%= link_to player_path(enter.user) do %>
                 <%= enter.user.last_name %> <%= enter.user.first_name %>さん
               <% end %>
             <% end %>

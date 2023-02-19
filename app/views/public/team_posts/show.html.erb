@@ -27,12 +27,21 @@
         <% end %>
       <% end %>
       </h5>
-      <table class="table">
+      <table class="table table-border">
         <tr>
-          <th style="width :25%">チーム名</th><td><%= @team_post.team.name %></td>
+          <th style="width :25%">チーム名</th><td><%= link_to @team_post.team.name, team_path(@team_post.team) %></td>
         </tr>
         <tr>
-          <th>投稿者</th><td><%= @team_post.team.user.last_name %></td>
+          <th>投稿者</th>
+          <td>
+            <% if @team_post.team.user.nickname.present? %>
+              <%= link_to @team_post.team.user.nickname %>
+            <% else %>
+              <%= link_to player_path(@team_post.team.user) do %>
+                <%= @team_post.team.user.last_name %> <%= @team_post.team.user.first_name %>
+              <% end %>
+            <% end %>
+          </td>
         </tr>
         <tr>
           <th>投稿種類</th><td><%= @team_post.post_type_i18n %></td>
@@ -52,8 +61,8 @@
   <div class="d-flex align-items-center justify-content-center">
     <% if user_signed_in? %>
       <% if @team_post.team.user.id == current_user.id %>
-        <%= form_with model: @team_post, url: team_post_path, method: :delete do |f| %>
-          <%= f.submit "コメントを削除する", class: "btn btn-danger" %>
+        <%= form_with model: @team_post, url: team_post_path(@team_post), method: :delete do |f| %>
+          <%= f.submit "投稿を削除する", class: "btn btn-danger", data: { confirm: "本当に削除しますか？"} %>
         <% end %>
       <% end %>
       <% unless @user.id == current_user.id %>

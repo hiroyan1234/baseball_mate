@@ -23,9 +23,9 @@
           <th>投稿者</th>
           <td>
             <% if @team.user.nickname.present? %>
-              <%= link_to @team.user.nickname, user_path(@team.user.id) %>
+              <%= link_to @team.user.nickname, admin_user_path(@team.user.id) %>
             <% else %>
-              <%= link_to user_path(@team.user.id) do %>
+              <%= link_to admin_user_path(@team.user.id) do %>
                 <%= @team.user.last_name %> <%= @team.user.first_name %>
               <% end %>
             <% end %>
@@ -45,7 +45,7 @@
 <div class"container mt-4">
   <div class="d-flex align-items-center justify-content-center">
     <div class="d-flex">
-      <%= link_to "チーム情報を編集する",  edit_team_path(@team.id), class: "btn btn-success" %>
+      <%= link_to "チーム情報を編集する",  edit_admin_team_path(@team.id), class: "btn btn-success" %>
     </div>
   </div>
 </div>

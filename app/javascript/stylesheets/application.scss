@@ -7,6 +7,21 @@
   background-image: url(/top_page.jpg);
   background-size: cover;
   background-position: center;
+  margin-top: 100px;
+}
+
+.main-visual-content {
+  text-align: center;
+  width: 100%;
+  height: 100px;
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+  position: absolute;
+  top: 50%;
+}
+
+.table-border {
+  border-bottom: solid 1px #DDD;
 }
 
 .outer {

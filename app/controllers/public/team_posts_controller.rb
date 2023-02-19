@@ -1,6 +1,6 @@
 class Public::TeamPostsController < ApplicationController
   before_action :authenticate_user!,except: [:show, :index, :search, :tag_search]
-  
+
   def new
     @team_post = TeamPost.new(team_post_params)
   end
@@ -61,8 +61,8 @@ class Public::TeamPostsController < ApplicationController
       redirect_to team_posts_path
     end
     @team_post = TeamPost.find(params[:id])
-    if @team_post.delete
-      redirect_to user_path(current_user.id)
+    if @team_post.destroy
+      redirect_to team_posts_path
     else
       render :show
     end

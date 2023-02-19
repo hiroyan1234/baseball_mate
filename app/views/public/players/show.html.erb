@@ -1,10 +1,14 @@
 <p id="notice"></p>
 <div class="container d-flex mt-4">
   <h4 class="bg-light">
-    <% if @user.nickname.present? %>
-      <%= @user.nickname %>さんのプロフィール
+    <% if @user == current_user %>
+      マイページ
     <% else %>
-      <%= @user.last_name %> <%= @user.first_name %>さんのプロフィール
+      <% if @user.nickname.present? %>
+        <%= @user.nickname %>さんのプロフィール
+      <% else %>
+        <%= @user.last_name %> <%= @user.first_name %>さんのプロフィール
+      <% end %>
     <% end %>
   </h4>
 </div>

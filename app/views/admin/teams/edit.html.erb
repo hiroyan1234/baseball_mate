@@ -1,0 +1,30 @@
+<p id="notice"></p>
+<div class="container d-flex mt-4">
+  <h4 class="bg-light">チーム情報編集</h4>
+</div>
+
+<%= form_with model: @team, url: admin_team_path(@team.id), method: :patch do |f| %>
+<div class="container" style="width: 50%">
+  <div class="align-items-center justify-content-center">
+    <div class="row">
+        <table class="table">
+          <tr>
+            <th style="width: 30%">チーム画像</th><td style="width: 40%"><%= f.file_field :image, accept: "image/*" %></td>
+          </tr>
+          <tr>
+            <th>チーム名</th><td><%= f.text_field :name, placeholder: "チーム名" %></td>
+          </tr>
+          <tr>
+            <th>平均年齢</th><td><%= f.select :age, *[18..80], { prompt: "選択してください" } %></td>
+          </tr>
+          <tr>
+            <th>紹介文</th><td><%= f.text_area :introduction, style: "width: 70%", rows: 5 %></td>
+          </tr>
+        </table>
+    </div>
+  </div>
+  <div class="d-flex align-items-center justify-content-center">
+    <%= f.submit "チーム情報更新", class: "btn btn-success" %>
+  </div>
+</div>
+<% end %>
