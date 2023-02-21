@@ -12,20 +12,32 @@ class Admin::TeamPostsController < ApplicationController
       @team_posts.uniq!
     end
   end
-  
+
   def show
     @team_post = TeamPost.find(params[:id])
   end
-  
+
   def destroy
     @team_post = TeamPost.find(params[:id])
-    if @team_post.delete
-      redirect_to admin_team_posts
+    if @team_post.destroy
+      redirect_to admin_team_posts_path
     else
-      render admin_team_post(@team_post)
+      render :show
     end
   end
-  
+
+  def search
+    @team_posts = TeamPost.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
+  end
+
+  def tag_search
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @team_posts = @tag.team_posts.order("created_at DESC").page(params[:page])
+  end
+
   private
 
   def admin_signed_in
@@ -33,5 +45,5 @@ class Admin::TeamPostsController < ApplicationController
       redirect_to new_admin_session_path
     end
   end
-  
+
 end

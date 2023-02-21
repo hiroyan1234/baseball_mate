@@ -1,5 +1,5 @@
 <div class="container d-flex mt-4 mb-4">
-  <h4 class="bg-light">ユーザー（選手）一覧</h4>
+  <h4 class="bg-light">ユーザー一覧</h4>
 </div>
 
 <div class="container">
@@ -20,7 +20,10 @@
             <div class="author">
               ユーザー名(ニックネーム):
               <%= link_to admin_user_path(user), method: :get do %>
-                <%= user.last_name %> <%= user.first_name %>(<%= user.nickname %>)
+                <%= user.last_name %> <%= user.first_name %>
+                <% if user.nickname.present? %>
+                  (<%= user.nickname %>)
+                <% end %>
               <% end %>
             </div>
             <ol class="sub pb-2">

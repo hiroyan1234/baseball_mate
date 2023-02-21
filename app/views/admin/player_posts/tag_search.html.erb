@@ -1,5 +1,5 @@
 <div class="container d-flex mt-4 mb-4">
-  <h4 class="bg-light">選手投稿一覧</h4>
+  <h4 class="bg-light">選手投稿一覧(タグ検索)</h4>
 </div>
 
 <div class="container">
@@ -11,7 +11,7 @@
       <% end %>
     </div>
 
-    <div class="col-7">
+     <div class="col-7">
       <ul class="recruit-list">
         <% @player_posts.each do |player_post| %>
           <li class="recruit new_rec">
@@ -23,7 +23,7 @@
               <% if player_post.user.nickname.present? %>
                 <%= link_to player_post.user.nickname, admin_user_path(player_post.user) %>
               <% else %>
-                <%= link_to admin_user_path(player_post.user) do %>
+                <%= link_to admin_player_path(player_post.user) do %>
                   <%= player_post.user.last_name %> <%= player_post.user.first_name %>
                 <% end %>
               <% end %>
@@ -32,10 +32,12 @@
               <li>投稿種類: <%= player_post.post_type_i18n %></li>
               <li>活動場所: <%= player_post.prefecture %> > <%= player_post.city %></li>
             </ol>
-            <div class="mb-10">
-              <% player_post.tags.each do |tag| %>
-                <span class="tag"><%= link_to tag.name, admin_player_tag_search_path(tag_id: tag.id) %></span>
-              <% end %>
+            <div>
+              <ol class="mb-3">
+                <% player_post.tags.each do |tag| %>
+                  <span class="tag"><%= link_to tag.name, admin_player_tag_search_path(tag_id: tag.id) %></span>
+                <% end %>
+              </ol>
             </div>
           </li>
         <% end %>

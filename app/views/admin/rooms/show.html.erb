@@ -1,10 +1,10 @@
 <div class="container">
   <div class="left-button">
-    <%= link_to "メッセージ一覧に戻る", rooms_path, class: "edit_link" %>
+    <%= link_to "メッセージ一覧に戻る", admin_rooms_path, class: "edit_link" %>
   </div>
   <h4 class="rooms-title">メッセージ相手</h4>
   <% @enters.each do |enter| %>
-    <div class="d-flex">
+    <div class="d-flex mb-3">
       <div>
         <% if enter.user.image.attached? %>
           <%= image_tag enter.user.image, class:"user-image" %>
@@ -14,9 +14,9 @@
       </div>
       <div>
         <% if enter.user.nickname == true %>
-          <%= link_to enter.user.nickname, user_path(enter.user) %>さん
+          <%= link_to enter.user.nickname, admin_user_path(enter.user) %>さん
         <% else %>
-          <%= link_to user_path(enter.user) do %>
+          <%= link_to admin_user_path(enter.user) do %>
             <%= enter.user.last_name %> <%= enter.user.first_name %>さん
           <% end %>
         <% end %>

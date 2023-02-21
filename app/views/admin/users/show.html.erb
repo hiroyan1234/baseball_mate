@@ -1,24 +1,45 @@
 <p id="notice"></p>
 <div class="container d-flex mt-4">
-  <h4 class="bg-light"><%= @user.nickname %>さんのプロフィール</h4>
+  <h4 class="bg-light">
+    <%= @user.last_name %> <%= @user.first_name %>さんの会員情報
+  </h4>
 </div>
 
-<div class="container mb-4">
+ <div class="container mb-5" style="width: 80%">
   <div class="row">
-    <div class="col-5">
-      <% if @user.image.attached? %>
-        <%= image_tag @user.image, size: "200x200" %>
-      <% else %>
-        <%= image_tag 'default-image', size: "200x200" %>
-      <% end %>
+    <div class="col-2">
     </div>
     <div class="col-7">
-      <table class="table">
+      <table class="table table-borderless">
         <tr>
-          <th style="width :20%">名前(年齢)</th><td><%= @user.last_name %> <%= @user.first_name %>(<%= @user.age %>歳)</td>
+          <th style="width: 30%">名前</th>
+          <td style="width: 10%">
+            <%= @user.last_name %> <%= @user.first_name %>
+          </td>
         </tr>
         <tr>
-          <th>ニックネーム</th><td><%= @user.nickname %></td>
+          <th>フリガナ</th>
+          <td>
+            <%= @user.last_name %> <%= @user.first_name %>
+          </td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td>
+            <%= @user.email %>
+          </td>
+        </tr>
+        <tr>
+          <th>電話番号(ハイフンなし)</th>
+          <td>
+            <%= @user.telephone_number %>
+          </td>
+        </tr>
+        <tr>
+          <th>年齢</th>
+          <td>
+            <%= @user.age %>
+          </td>
         </tr>
         <tr>
           <th>性別</th>
@@ -26,46 +47,17 @@
             <%= @user.sex_i18n %>
           </td>
         </tr>
-        <tr>
-          <th>自己紹介</th><td><%= @user.introduction %></td>
-        </tr>
       </table>
-      <div class="d-flex">
-        <div class="mr-4 mb-10">
-          <%= link_to "プロフィールを編集する", edit_admin_user_path, class: "btn btn-success" %>
-        </div>
-      </div>
     </div>
   </div>
 </div>
-
-  <div class="container index-post mt-3">
-    <% if @user.teams.present? %>
-    <div class="d-flex mt-4">
-      <h4 class="bg-light">登録チーム</h4>
+<div class="container mt-5">
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="mr-3">
+      <%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-success" %>
     </div>
-    <div class="mt-4 team-list row d-flex">
-        <% @user.teams.each do |team| %>
-          <div class="mt-4 container team">
-            <div class="row">
-              <div class="text-l">
-                <h4 class="space">チーム名</h4>
-              </div>
-              <div class="mb-4 text-l">
-                <% if team.image.attached? %>
-                  <%= image_tag team.image, size: "35x35" %>
-                <% else %>
-                  <%= image_tag 'default-image', size: "35x35" %>
-                <% end %>
-              </div>
-              <div class="pb-2 ml-3 text-l mr-auto">
-                <h4>
-                  <%= link_to team.name, team_path(team.id) %>
-                </h4>
-              </div>
-            </div>
-          </div>
-        <% end %>
+    <div>
+      <%= link_to "選手情報詳細", admin_player_path(@user), class: "btn btn-primary" %>
     </div>
-    <% end %>
   </div>
+</div>

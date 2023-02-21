@@ -11,37 +11,34 @@
       <% end %>
     </div>
     <div class="col-7">
-      <ul class="message-list">
-        <% @rooms.each do |room| %>
-          <%= link_to admin_room_path(room) do %>
-          <div class="message new_rec mb-10">
-            <div class="d-flex mb-10">
-              <div class="align-middle mt-3">
-                <% room.enters.each do |enter| %>
+      <div class="message-list pb-3"></div>
+      <% @rooms.each do |room| %>
+        <%= link_to admin_room_path(room) do %>
+        <div class="message new_rec mb-10">
+            <% room.enters.each do |enter| %>
+              <div class="d-flex mb-3">
+                <div>
                   <% if enter.user.image.attached? %>
                     <%= image_tag enter.user.image, size: "45x45" %>
                   <% else %>
                     <%= image_tag "default-image", size: "45x45" %>
                   <% end %>
-              </div>
-              <div>
-                <li class="mt-3 ml-3">
-                    <% if enter.user.nickname.present? %>
-                      <%= enter.user.nickname %>
-                    <% else %>
-                      <%= enter.user.last_name %> <%= enter.user.first_name %>
-                    <% end %>
-                </li>
-                <% end %>
-                <li class="ml-3">
+                </div>
+                <div>
+                  <% if enter.user.nickname.present? %>
+                    <%= enter.user.nickname %>
+                  <% else %>
+                    <%= enter.user.last_name %> <%= enter.user.first_name %>
+                  <% end %>
+                </div>
+                <div>
                   <%= room.messages.order(created_at: :desc).take.try(:content) %>
-                </li>
+                </div>
               </div>
-            </div>
-          </div>
-          <% end %>
+            <% end %>
+        </div>
         <% end %>
-      </ul>
+      <% end %>
       <%= paginate @rooms %>
     </div>
   </div>

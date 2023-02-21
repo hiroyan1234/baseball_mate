@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row">
     <div class="search-form col-3">
-      <%= form_with url: team_search_path, method: :get, local: true do |f| %>
+      <%= form_with url: admin_team_search_path, method: :get, local: true do |f| %>
         <%= f.text_field :keyword, value: @keyword %>
         <%= f.submit "検索" %>
       <% end %>
@@ -25,7 +25,7 @@
             </ol>
             <div class="mb-10">
               <% team_post.tags.each do |tag| %>
-                <span class="tag"><%= link_to tag.name, team_tag_search_path(tag_id: tag.id) %></span>
+                <span class="tag"><%= link_to tag.name, admin_team_tag_search_path(tag_id: tag.id) %></span>
               <% end %>
             </div>
           </li>

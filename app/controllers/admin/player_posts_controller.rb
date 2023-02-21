@@ -19,13 +19,25 @@ class Admin::PlayerPostsController < ApplicationController
 
   def destroy
     @player_post = PlayerPost.find(params[:id])
-    if @player_post.delete
-      redirect_to admin_player_posts
+    if @player_post.destroy
+      redirect_to admin_player_posts_path
     else
-      render admin_player_post(@player_post)
+      render :show
     end
   end
-  
+
+  def search
+    @player_posts = PlayerPost.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
+  end
+
+  def tag_search
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @player_posts = @tag.player_posts.page(params[:page])
+  end
+
   def admin_signed_in
     unless admin_signed_in?
       redirect_to new_admin_session_path

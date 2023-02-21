@@ -17,8 +17,13 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   namespace :admin do
+    get 'team_search' => 'team_posts#search'
+    get 'player_search' => 'player_posts#search'
+    get 'team_tag_search' => 'team_posts#tag_search'
+    get 'player_tag_search' => 'player_posts#tag_search'
     resources :users, only: [:index, :edit, :update, :show]
     resources :teams, only: [:index, :edit, :update, :show]
+    resources :players, only: [:index, :edit, :update, :show]
     resources :rooms, only: [:index, :show]
     get 'homes/top'
     resources :player_posts, only: [:index, :show, :destroy]
