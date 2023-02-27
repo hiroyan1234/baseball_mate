@@ -17,7 +17,7 @@
     <header class="border-bottom">
       <div class="container">
         <div class="row d-flex mb-4">
-          <div class="mr-auto"><%= link_to "Baseball-mate", root_path, class: "btn border", style: "height: 40px" %></div>
+          <div class="mr-auto"><%= link_to "BaseballMate", root_path, class: "btn border", style: "height: 40px" %></div>
           <% if !user_signed_in? && !admin_signed_in? %>
             <div class="title"><%= link_to "ログイン", new_user_session_path, method: :get, class: "btn border" %></div>
             <div class="title"><%= link_to "新規登録", new_user_registration_path, class: "btn border" %></div>

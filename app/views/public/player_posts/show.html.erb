@@ -27,12 +27,12 @@
         <% end %>
       <% end %>
       </h5>
-      <table class="table">
+      <table class="table table-border">
         <tr>
           <th>投稿者</th>
           <td>
             <% if @player_post.user.nickname.present? %>
-              <%= link_to @player_post.user.nickname, user_path(@player_post.user) %>
+              <%= link_to @player_post.user.nickname, player_path(@player_post.user) %>
             <% else %>
               <%= link_to player_path(@player_post.user) do %>
                 <%= @player_post.user.last_name %> <%= @player_post.user.first_name %>

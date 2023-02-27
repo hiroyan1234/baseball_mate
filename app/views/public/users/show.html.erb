@@ -1,3 +1,4 @@
+<%= flash[:notice] %>
 <p id="notice"></p>
 <div class="container d-flex mt-4">
   <h4 class="bg-light">
@@ -20,7 +21,7 @@
         <tr>
           <th>フリガナ</th>
           <td>
-            <%= @user.last_name %> <%= @user.first_name %>
+            <%= @user.last_name_kana %> <%= @user.first_name_kana %>
           </td>
         </tr>
         <tr>

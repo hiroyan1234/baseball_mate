@@ -2,9 +2,18 @@
 <div class="container d-flex mt-4">
   <h4 class="bg-light">新規会員登録</h4>
 </div>
+<div class="container">
+<% if @user.errors.any? %>
+  <h3><%= @user.errors.count %> 件のエラーが発生しました。</h3>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+</div>
 
 <%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
 
 
  <div class="container mb-5" style="width: 80%">
@@ -12,7 +21,7 @@
     <div class="row">
       <table class="table table-borderless">
         <tr>
-          <th style="width: 30%">名前</th>
+          <th style="width: 30%">名前<span> ※必須</span></th>
           <td style="width: 10%">
             <%= f.label :last_name, "(姓)　", class: "mr-3 ml-4" %>
           </td>
@@ -23,7 +32,7 @@
           </td>
         </tr>
         <tr>
-          <th>フリガナ</th>
+          <th>フリガナ<span> ※必須</span></th>
           <td>
             <%= f.label :last_name_kana, "(セイ)", class: "mr-3 ml-4" %>
           </td>
@@ -34,42 +43,42 @@
           </td>
         </tr>
         <tr>
-          <th>メールアドレス</th>
+          <th>メールアドレス<span> ※必須</span></th>
           <td></td>
           <td>
             <%= f.email_field :email %>
           </td>
         </tr>
         <tr>
-          <th>電話番号(ハイフンなし)</th>
+          <th>電話番号(ハイフンなし)<span> ※必須</span></th>
           <td></td>
           <td>
             <%= f.text_field :telephone_number %>
           </td>
         </tr>
         <tr>
-          <th>年齢</th>
+          <th>年齢<span> ※必須</span></th>
           <td></td>
           <td>
             <%= f.select :age, *[18..80], { prompt: "選択してください" } %>
           </td>
         </tr>
         <tr>
-          <th>性別</th>
+          <th>性別<span> ※必須</span></th>
           <td></td>
           <td>
             <%= f.select :sex, User.sexes.keys.map {|k| [I18n.t("enums.user.sex.#{k}"), k]}, { prompt: "選択してください" } %>
           </td>
         </tr>
         <tr>
-          <th>パスワード(6文字以上）</th>
+          <th>パスワード(6文字以上)<span> ※必須</span></th>
           <td></td>
           <td>
             <%= f.password_field :password, autocomplete: "new-password" %>
           </td>
         </tr>
         <tr>
-          <th>パスワード(確認用)</th>
+          <th>パスワード(確認用)<span> ※必須</span></th>
           <td></td>
           <td>
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>

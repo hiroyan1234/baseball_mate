@@ -15,7 +15,7 @@
       <% end %>
     </div>
     <div class="col-6">
-      <table class="table">
+      <table class="table table-border">
         <tr>
           <th style="width :25%">チーム名</th><td><%= @team.name %></td>
         </tr>
@@ -23,7 +23,7 @@
           <th>投稿者</th>
           <td>
             <% if @team.user.nickname.present? %>
-              <%= link_to @team.user.nickname, user_path(@team.user.id) %>
+              <%= link_to @team.user.nickname, player_path(@team.user.id) %>
             <% else %>
               <%= link_to player_path(@team.user.id) do %>
                 <%= @team.user.last_name %> <%= @team.user.first_name %>

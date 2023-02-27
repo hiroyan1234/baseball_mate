@@ -7,9 +7,9 @@
     <div class="d-flex mb-3">
       <div>
         <% if enter.user.image.attached? %>
-          <%= image_tag enter.user.image, class:"user-image" %>
+          <%= image_tag enter.user.image, class:"user-image", size: "100x100" %>
         <% else %>
-          <%= image_tag "default-image", class:"user-image" %>
+          <%= image_tag "default-image", class:"user-image", size: "100x100" %>
         <% end %>
       </div>
       <div>

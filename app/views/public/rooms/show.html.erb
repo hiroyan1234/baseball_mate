@@ -9,17 +9,19 @@
       <% else %>
         <div>
           <% if enter.user.image.attached? %>
-            <%= image_tag enter.user.image, class:"user-image" %>
+            <%= image_tag enter.user.image, class:"user-image", size: "100x100" %>
           <% else %>
-            <%= image_tag "default-image", class:"user-image" %>
+            <%= image_tag "default-image", class:"user-image", size: "100x100" %>
           <% end %>
         </div>
           <div>
-            <% if enter.user.nickname == true %>
-              <%= link_to enter.user.nickname, player_path(enter.user) %>さん
+            <% if enter.user.nickname.present? %>
+              <%= link_to player_path(enter.user) do %>
+                <%= enter.user.last_name %> <%= enter.user.first_name %>(<%= enter.user.nickname %>)
+              <% end %>
             <% else %>
               <%= link_to player_path(enter.user) do %>
-                <%= enter.user.last_name %> <%= enter.user.first_name %>さん
+                <%= enter.user.last_name %> <%= enter.user.first_name %>
               <% end %>
             <% end %>
           </div>

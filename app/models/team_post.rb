@@ -5,7 +5,6 @@ class TeamPost < ApplicationRecord
   has_many :tag_teams, dependent: :destroy
   has_many :tags, through: :tag_teams
 
-
   validates :content, presence: true
   validates :post_type, presence: true
   validates :prefecture, presence: true

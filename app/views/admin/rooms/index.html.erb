@@ -15,27 +15,29 @@
       <% @rooms.each do |room| %>
         <%= link_to admin_room_path(room) do %>
         <div class="message new_rec mb-10">
-            <% room.enters.each do |enter| %>
-              <div class="d-flex mb-3">
-                <div>
-                  <% if enter.user.image.attached? %>
-                    <%= image_tag enter.user.image, size: "45x45" %>
-                  <% else %>
-                    <%= image_tag "default-image", size: "45x45" %>
-                  <% end %>
-                </div>
-                <div>
-                  <% if enter.user.nickname.present? %>
-                    <%= enter.user.nickname %>
-                  <% else %>
-                    <%= enter.user.last_name %> <%= enter.user.first_name %>
-                  <% end %>
-                </div>
-                <div>
-                  <%= room.messages.order(created_at: :desc).take.try(:content) %>
-                </div>
+          <div class="mb-3">
+          <% room.enters.each do |enter| %>
+            <div class="d-flex mb-3">
+              <div>
+                <% if enter.user.image.attached? %>
+                  <%= image_tag enter.user.image, size: "45x45" %>
+                <% else %>
+                  <%= image_tag "default-image", size: "45x45" %>
+                <% end %>
               </div>
-            <% end %>
+              <div>
+                <% if enter.user.nickname.present? %>
+                  <%= enter.user.nickname %>
+                <% else %>
+                  <%= enter.user.last_name %> <%= enter.user.first_name %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+          <div>
+            <%= room.messages.order(created_at: :desc).take.try(:content) %>
+          </div>
         </div>
         <% end %>
       <% end %>

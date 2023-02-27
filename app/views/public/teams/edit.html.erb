@@ -2,6 +2,16 @@
 <div class="container d-flex mt-4">
   <h4 class="bg-light">チーム情報編集</h4>
 </div>
+<div class="container">
+<% if @team.errors.any? %>
+  <h3><%= @team.errors.count %> 件のエラーが発生しました。</h3>
+  <ul>
+    <% @team.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+</div>
 
 <%= form_with model: @team, url: team_path(@team.id), method: :patch do |f| %>
 <div class="container" style="width: 50%">
@@ -12,13 +22,13 @@
             <th style="width: 30%">チーム画像</th><td style="width: 40%"><%= f.file_field :image, accept: "image/*" %></td>
           </tr>
           <tr>
-            <th>チーム名</th><td><%= f.text_field :name, placeholder: "チーム名" %></td>
+            <th>チーム名<span> ※必須</span></th><td><%= f.text_field :name, placeholder: "チーム名" %></td>
           </tr>
           <tr>
-            <th>平均年齢</th><td><%= f.select :age, *[18..80], { prompt: "選択してください" } %></td>
+            <th>平均年齢<span> ※必須</span></th><td><%= f.select :age, *[18..80], { prompt: "選択してください" } %></td>
           </tr>
           <tr>
-            <th>紹介文</th><td><%= f.text_area :introduction, style: "width: 70%", rows: 5 %></td>
+            <th>紹介文<span> ※必須</span></th><td><%= f.text_area :introduction, style: "width: 70%", rows: 5 %></td>
           </tr>
         </table>
     </div>

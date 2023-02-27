@@ -13,7 +13,7 @@ class Message < ApplicationRecord
     @rooms = Room.all
     @room = @rooms.each do |room|
       @enters = room.enter.all
-      
+
     end
   end
 end

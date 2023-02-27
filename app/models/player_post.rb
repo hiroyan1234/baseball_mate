@@ -5,7 +5,7 @@ class PlayerPost < ApplicationRecord
   has_many :tag_players, dependent: :destroy
   has_many :tags, through: :tag_players
 
-
+  validates :title, presence: true
   validates :content, presence: true
   validates :post_type, presence: true
   validates :prefecture, presence: true

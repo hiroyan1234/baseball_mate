@@ -43,7 +43,7 @@ class Public::PlayerPostsController < ApplicationController
 
 
   def index
-    @player_posts = PlayerPost.page(params[:page])
+    @player_posts = PlayerPost.order("created_at DESC").page(params[:page])
     @tag_list = Tag.all
     if params[:tag_ids]
       @player_posts = [:name]
@@ -69,7 +69,7 @@ class Public::PlayerPostsController < ApplicationController
   end
 
   def search
-    @player_posts = PlayerPost.search(params[:keyword])
+    @player_posts = PlayerPost.search(params[:keyword]).page(params[:page])
     @keyword = params[:keyword]
     render "index"
   end

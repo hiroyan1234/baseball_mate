@@ -5,38 +5,39 @@
 <div class="container">
   <div class="row">
     <div class="search-form col-3">
-      <%= form_with url: team_search_path, method: :get, local: true do |f| %>
-        <%= f.text_field :keyword, value: @keyword %>
-        <%= f.submit "検索" %>
-      <% end %>
     </div>
     <div class="col-7">
       <ul class="message-list">
-        <% @another_enters.each do |another_enter| %>
-          <%= link_to room_path(another_enter.room.id) do %>
-          <div class="message new_rec mb-10">
-            <div class="d-flex mb-10">
-              <div class="align-middle mt-3">
-                <% if another_enter.user.image.attached? %>
-                  <%= image_tag another_enter.user.image, size: "45x45" %>
-                <% else %>
-                  <%= image_tag "default-image", size: "45x45" %>
-                <% end %>
-              </div>
-              <div>
-                <li class="mt-3 ml-3">
-                  <% if another_enter.user.nickname.present? %>
-                    <%= another_enter.user.nickname %>
-                  <% else %>
-                    <%= another_enter.user.last_name %> <%= another_enter.user.first_name %>
-                  <% end %>
-                </li>
-                <li class="ml-3">
-                  <%= another_enter.room.messages.order(created_at: :desc).take.try(:content) %>
-                </li>
-              </div>
-            </div>
-          </div>
+        <% @rooms.each do |room| %>
+          <%= link_to room_path(room.id) do %>
+            <% room.enters.each do |enter| %>
+              <% if enter.user != current_user %>
+                <div class="message new_rec mb-10">
+                  <div class="d-flex mb-10">
+                    <div class="align-middle mt-3">
+                      <% if enter.user.image.attached? %>
+                        <%= image_tag enter.user.image, size: "45x45" %>
+                      <% else %>
+                        <%= image_tag "default-image", size: "45x45" %>
+                      <% end %>
+                    </div>
+                    <div>
+                      <li class="mt-3 ml-3 black">
+                        <% if enter.user.nickname.present? %>
+                          <%= enter.user.last_name %> <%= enter.user.first_name %>(<%= enter.user.nickname %>)
+                        <% else %>
+                          <%= enter.user.last_name %> <%= enter.user.first_name %>
+                        <% end %>
+                      </li>
+  
+                      <li class="ml-3 gray">
+                        <%= room.messages.order(created_at: :desc).take.try(:content) %>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
           <% end %>
         <% end %>
       </ul>

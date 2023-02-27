@@ -38,7 +38,7 @@ class Public::PlayersController < ApplicationController
     end
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:notice] = "情報を更新しました"
+      flash[:notice] = "選手情報を更新しました"
       redirect_to player_path(@user)
     else
       render :edit

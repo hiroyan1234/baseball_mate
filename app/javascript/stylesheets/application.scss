@@ -17,7 +17,7 @@
   color: white;
   background-color: rgba(0,0,0,0.5);
   position: absolute;
-  top: 50%;
+  margin-top: 180px;
 }
 
 .table-border {
@@ -159,4 +159,16 @@ ol {
 
 .date {
   text-align: right;
+}
+
+.black {
+  color: black;
+}
+
+.gray {
+  color: rgb(170,170,170);
+}
+
+span {
+  color: rgba(255,0,0,0.5);
 }

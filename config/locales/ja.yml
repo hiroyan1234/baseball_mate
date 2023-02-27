@@ -15,3 +15,29 @@ ja:
         recruitment: "メンバー募集"
         helper: "助っ人募集"
         game: "対戦相手募集"
+
+  activerecord:
+    attributes:
+      user:
+        last_name: "姓"
+        first_name: "名"
+        last_name_kana: "姓カナ"
+        first_name_kana: "名カナ"
+        email: "メールアドレス"
+        telephone_number: "電話番号"
+        age: "年齢"
+        sex: "性別"
+        password: "パスワード"
+
+      player_post:
+        title: "タイトル"
+        content: "本文"
+        post_type: "投稿種類"
+        prefecture: "活動都道府県"
+        position: "ポジション"
+
+      team:
+        name: "チーム名"
+        age: "平均年齢"
+        introduction: "紹介文"
+

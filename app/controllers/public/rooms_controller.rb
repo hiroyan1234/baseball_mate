@@ -10,7 +10,7 @@ class Public::RoomsController < ApplicationController
 
   def index
   @users = User.all
-  @rooms = Room.all
+  @rooms = current_user.rooms.includes(:messages).order("messages.created_at DESC").page(params[:page])
   @current_enters = current_user.enters
   myRoomIds = []
 
@@ -18,7 +18,6 @@ class Public::RoomsController < ApplicationController
     myRoomIds << enter.room.id
   end
 
-  @another_enters = Enter.where(room_id: myRoomIds).where('user_id != ?', current_user.id)
     @keyword = params[:keyword]
     render "index"
   end

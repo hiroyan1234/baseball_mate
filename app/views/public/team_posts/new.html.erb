@@ -2,6 +2,16 @@
 <div class="container d-flex mt-4">
   <h4 class="bg-light">チーム投稿</h4>
 </div>
+<div class="container">
+<% if @team_post.errors.any? %>
+  <h3><%= @team_post.errors.count %> 件のエラーが発生しました。</h3>
+  <ul>
+    <% @team_post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+</div>
 
 <%= form_with model: @team_post, url: team_posts_path, method: :post do |f| %>
 <div class="container" style="width: 50%">
@@ -9,19 +19,19 @@
     <div class="row">
         <table class="table">
           <tr>
-            <th>タイトル</th><td><%= f.text_field :title, placeholder: "(例) ピッチャーを募集しています", style: "width: 100%" %></td>
+            <th>タイトル<span> ※必須</span></th><td><%= f.text_field :title, placeholder: "(例) ピッチャーを募集しています", style: "width: 100%" %></td>
           </tr>
           <tr>
-            <th>投稿種類</th><td><%= f.select :post_type, TeamPost.post_types.keys.map {|k| [I18n.t("enums.team_post.post_type.#{k}"), k]}, { prompt: "選択してください" } %></td>
+            <th>投稿種類<span> ※必須</span></th><td><%= f.select :post_type, TeamPost.post_types.keys.map {|k| [I18n.t("enums.team_post.post_type.#{k}"), k]}, { prompt: "選択してください" } %></td>
           </tr>
           <tr>
-            <th>活動都道府県</th><td><%= f.text_field :prefecture, placeholder: "(例)東京都" %></td>
+            <th>活動都道府県<span> ※必須</span></th><td><%= f.text_field :prefecture, placeholder: "(例)東京都" %></td>
           </tr>
           <tr>
             <th>活動都市</th><td><%= f.text_field :city, placeholder: "(例)日野市" %></td>
           </tr>
           <tr>
-            <th style="width: 30%">本文</th><td style="width: 40%"><%= f.text_area :content, placeholder: "本文", style: "width: 70%", rows: 5 %></td>
+            <th style="width: 30%">本文<span> ※必須</span></th><td style="width: 40%"><%= f.text_area :content, placeholder: "本文", style: "width: 70%", rows: 5 %></td>
           </tr>
           <tr>
             <th>

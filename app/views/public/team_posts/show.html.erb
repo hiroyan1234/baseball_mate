@@ -35,9 +35,9 @@
           <th>投稿者</th>
           <td>
             <% if @team_post.team.user.nickname.present? %>
-              <%= link_to @team_post.team.user.nickname %>
+              <%= link_to @team_post.team.user.nickname, player_path(@team_post.team.user) %>
             <% else %>
-              <%= link_to player_path(@team_post.team.user) do %>
+              <%= link_to player_path(@team_post.team.user), player_path(@team_post.team.user) do %>
                 <%= @team_post.team.user.last_name %> <%= @team_post.team.user.first_name %>
               <% end %>
             <% end %>
