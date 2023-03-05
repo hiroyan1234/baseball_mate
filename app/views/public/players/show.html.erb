@@ -91,7 +91,7 @@
                 <% if team.image.attached? %>
                   <%= image_tag team.image, size: "35x35" %>
                 <% else %>
-                  <%= image_tag asset_path('default-image.jpg'), size: "35x35" %>
+                  <%= image_tag asset_path('/default-image.jpg'), size: "35x35" %>
                 <% end %>
               </div>
               <div class="pb-2 ml-3 text-l mr-auto">
