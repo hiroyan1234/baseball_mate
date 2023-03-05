@@ -69,7 +69,7 @@ class Public::TeamPostsController < ApplicationController
   end
 
   def search
-    @team_posts = TeamPost.search(params[:keyword])
+    @team_posts = TeamPost.search(params[:keyword]).page(params[:page])
     @keyword = params[:keyword]
     render "index"
   end

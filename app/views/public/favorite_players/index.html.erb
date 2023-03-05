@@ -10,10 +10,10 @@
       <ul class="recruit-list">
         <% @favorite_players.each do |favorite_player| %>
           <li class="recruit new_rec">
-            <h4 class="align-middle title">
+            <h4 class="align-middle mt-3">
               <%= link_to favorite_player.player_post.title, player_post_path(favorite_player) %>
             </h4>
-            <div class="author">: <%= link_to favorite_player.player_post.user.nickname, player_path(favorite_player.player_post.user_id) %></div>
+            <div class="author">投稿者: <%= link_to favorite_player.player_post.user.nickname, player_path(favorite_player.player_post.user_id) %></div>
             <ol class="sub pb-2">
               <li>投稿種類: <%= favorite_player.player_post.post_type_i18n %></li>
               <li>活動場所: <%= favorite_player.player_post.prefecture %> > <%= favorite_player.player_post.city %></li>
@@ -39,6 +39,7 @@
             </div>
           </li>
         <% end %>
+        <%= paginate @favorite_players %>
       </ul>
     </div>
   </div>

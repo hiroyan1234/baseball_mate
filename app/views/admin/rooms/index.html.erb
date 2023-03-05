@@ -5,10 +5,6 @@
 <div class="container">
   <div class="row">
     <div class="search-form col-3">
-      <%= form_with url: team_search_path, method: :get, local: true do |f| %>
-        <%= f.text_field :keyword, value: @keyword %>
-        <%= f.submit "検索" %>
-      <% end %>
     </div>
     <div class="col-7">
       <div class="message-list pb-3"></div>

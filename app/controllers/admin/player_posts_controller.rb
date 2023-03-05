@@ -2,7 +2,7 @@ class Admin::PlayerPostsController < ApplicationController
   before_action :admin_signed_in
 
   def index
-    @player_posts = PlayerPost.page(params[:page])
+    @player_posts = PlayerPost.order("created_at DESC").page(params[:page])
     @tag_list = Tag.all
     if params[:tag_ids]
       @player_posts = [:name]
@@ -27,7 +27,7 @@ class Admin::PlayerPostsController < ApplicationController
   end
 
   def search
-    @player_posts = PlayerPost.search(params[:keyword])
+    @player_posts = PlayerPost.search(params[:keyword]).page(params[:page])
     @keyword = params[:keyword]
     render "index"
   end
@@ -35,7 +35,7 @@ class Admin::PlayerPostsController < ApplicationController
   def tag_search
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @player_posts = @tag.player_posts.page(params[:page])
+    @player_posts = @tag.player_posts.order("created_at DESC").page(params[:page])
   end
 
   def admin_signed_in

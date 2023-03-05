@@ -14,7 +14,7 @@ class Public::FavoriteTeamsController < ApplicationController
   end
   
   def index
-    @favorite_teams = current_user.favorite_teams
+    @favorite_teams = current_user.favorite_teams.order("created_at DESC").page(params[:page])
   end
   
   def move_to_signed_in

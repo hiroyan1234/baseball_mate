@@ -77,7 +77,7 @@ class Public::PlayerPostsController < ApplicationController
   def tag_search
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @player_posts = @tag.player_posts.page(params[:page])
+    @player_posts = @tag.player_posts.order("created_at DESC").page(params[:page])
   end
 
   private

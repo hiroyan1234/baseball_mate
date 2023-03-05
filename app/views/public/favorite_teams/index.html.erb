@@ -10,7 +10,7 @@
       <ul class="recruit-list">
         <% @favorite_teams.each do |favorite_team| %>
           <li class="recruit new_rec">
-            <h4 class="align-middle title">
+            <h4 class="align-middle mt-3">
               <%= link_to favorite_team.team_post.title, team_post_path(favorite_team.team_post) %>
             </h4>
             <div class="author">チーム名: <%= link_to favorite_team.team_post.team.name, team_path(favorite_team.team_post.team.id) %></div>
@@ -39,6 +39,7 @@
             </div>
           </li>
         <% end %>
+        <%= paginate @favorite_teams %>
       </ul>
     </div>
   </div>
