@@ -71,7 +71,7 @@
       <%= form_with model: @message do |f| %>
         <%= f.text_area :content, placeholder: "メッセージを入力して下さい" , style: "width: 70%", rows: 3, class:"form-text-field" %>
           <%= f.hidden_field :room_id, value: @room.id %>
-            <%= f.submit "投稿",class: 'form-submit'%>
+            <%= f.submit "送信",class: 'form-submit'%>
       <% end %>
     </div>
   </div>
