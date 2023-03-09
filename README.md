@@ -15,9 +15,6 @@
 ### 主な利用シーン
 <チームの人数不足で活動ができない時や、休日に体を動かしたい方>
 
-## 設計書
-<>
-
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
@@ -25,7 +22,17 @@
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
-## 使用素材
+##実装機能リスト
+- ゲストログイン
+- 会員機能
+- 所属チーム登録
+- 投稿機能
+- 投稿検索機能(キーワード検索)
+- 投稿検索機能(タグ検索)
+- いいね(ブックマーク)機能
+- いいね(ブックマーク)一覧表示機能
+- ダイレクトメッセージ機能
+- ユーザー管理機能
 
-##実装機能リストURL
-<https://docs.google.com/spreadsheets/d/1ZIBYD5_29Xb7hjTCrh0MN-KIGyM2XW-UBCYSrBmh91A/edit?usp=sharing>
+## 使用素材
+-  PAKUTAS https://www.pakutaso.com/20160739209post-8472.html
