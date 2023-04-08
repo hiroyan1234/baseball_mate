@@ -21,7 +21,7 @@ class User < ApplicationRecord
   validates :first_name_kana, presence: true
   validates :sex, presence: true
   validates :age, presence: true
-  validates :telephone_number, presence: true
+  validates :telephone_number, format: { with: /\A\d{10,11}\z/ }, presence: true
   validates :is_deleted, inclusion: {in: [true, false]}
 
   enum sex: { male: 0, female: 1 }
